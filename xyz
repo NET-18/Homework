@@ -1,0 +1,40 @@
+using System;
+
+
+
+namespace ConsoleApp1
+{
+    public struct xyz
+    {
+        // ���� ������
+        public double x;
+        public double y;
+        public double z;
+
+
+
+
+    }
+    internal class Program2
+    {
+        static void Main(string[] args)
+        {
+            Double x1 = 0; 
+            Double x2 = 0; 
+            Double y1 = 0;
+            Double y2 = 0; 
+            Double result; 
+            Console.Write("x1="); 
+            x1 = Convert.ToDouble(Console.ReadLine()); 
+            Console.Write("x2="); x2 = Convert.ToDouble(Console.ReadLine()); 
+            Console.Write("y1="); y1 = Convert.ToDouble(Console.ReadLine()); 
+            Console.Write("y2="); y2 = Convert.ToDouble(Console.ReadLine());
+            {
+                result = Math.Sqrt((x2 - x1)Math.Pow(2, 2) + (y2 - y1)Math.Pow(2, 2)); Console.WriteLine("result:" + result); 
+                Console.ReadLine();
+
+
+
+            }
+    }
+}
