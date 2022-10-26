@@ -9,7 +9,7 @@ namespace HW_1
         static void Main()
         {
             int el_num = 0;
-            var flag = false;
+            var isUncorrect = false;
             
             // приглашение пользователя к вводу кол-ва элементов
             do
@@ -18,14 +18,14 @@ namespace HW_1
                 if (!int.TryParse(Console.ReadLine(), out el_num) || el_num <= 1)
                 {
                     Console.WriteLine("Fakamakaka, input error\n");
-                    flag = true;
+                    isUncorrect = true;
                 }
                 else
                 {
-                    flag = false;
+                    isUncorrect = false;
                 }
             }
-            while (flag);
+            while (isUncorrect);
             
             // инициализация массива
             int[] numbers = new int[el_num];
@@ -38,14 +38,14 @@ namespace HW_1
                 if (!int.TryParse(Console.ReadLine(), out in_op) || in_op>1 || in_op<0)
                 {
                     Console.WriteLine("Fakamakaka, input error\n");
-                    flag = true;
+                    isUncorrect = true;
                 }
                 else
                 {
-                    flag = false;
+                    isUncorrect = false;
                 }
             }
-            while (flag);
+            while (isUncorrect);
 
             // где-нибудь написать бы метод, который убирал бы из массива повторяющиеся более 2-ух раз числа, но и так пойдет     
             // ручный / рандомный ввод исходных чисел
