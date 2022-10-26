@@ -1,18 +1,20 @@
 ﻿namespace DistanceApp
 {
    
-    internal struct Program
+    internal class Program
     {
-        public Double x_1;
-        public Double x_2;
-        public Double y_1;
-        public Double y_2;
-        public Double z_1;
-        public Double z_2;
-
+        struct Solid
+        {
+            public Double x_1;
+            public Double x_2;
+            public Double y_1;
+            public Double y_2;
+            public Double z_1;
+            public Double z_2;
+        }
         static void Main(string[] args)
         {
-            Program a = new Program();
+            Solid a = new Solid();
             Console.Write("Введите переменную х для точки А: ");
             a.x_1 = Convert.ToDouble(Console.ReadLine());
 

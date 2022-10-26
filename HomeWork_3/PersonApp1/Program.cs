@@ -2,9 +2,9 @@
 {
     public class Person
     {
-        public string _Name;
-        public string _SurName;
-        public int _Age;
+        public string _name;
+        public string _surName;
+        public int _age;
 
 
     }
@@ -15,14 +15,14 @@
         {
             Person a = new Person();
             Console.Write("Введите свою фамилию: ");
-            a._SurName = Convert.ToString(Console.ReadLine());
+            a._surName = Convert.ToString(Console.ReadLine());
 
 
             Console.Write("Введите свое имя: ");
-            a._Name = Convert.ToString(Console.ReadLine());
+            a._name = Convert.ToString(Console.ReadLine());
 
             Console.Write("Введите свой возраст: ");
-            a._Age = Convert.ToInt32(Console.ReadLine());
+            a._age = Convert.ToInt32(Console.ReadLine());
 
             OutPut(a);
 
@@ -31,9 +31,7 @@
         static void OutPut(Person t)
         {
 
-            Console.Write($"Вы {t._SurName}");
-            Console.Write($" {t._Name}");
-            Console.WriteLine($" и вам {t._Age} лет");
+            Console.Write($"Вы {t._surName} {t._name} и вам {t._age} лет");
         }
     }
 }
