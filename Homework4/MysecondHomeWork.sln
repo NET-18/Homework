@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceApp", "DistanceApp\DistanceApp.csproj", "{C66FD713-D9EB-4D4B-8079-78512846855F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MysecondHomeWork", "MysecondHomeWork\MysecondHomeWork.csproj", "{AECFFA7D-013D-4244-9312-31A20A346EA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C66FD713-D9EB-4D4B-8079-78512846855F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C66FD713-D9EB-4D4B-8079-78512846855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C66FD713-D9EB-4D4B-8079-78512846855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C66FD713-D9EB-4D4B-8079-78512846855F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AECFFA7D-013D-4244-9312-31A20A346EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AECFFA7D-013D-4244-9312-31A20A346EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AECFFA7D-013D-4244-9312-31A20A346EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AECFFA7D-013D-4244-9312-31A20A346EA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AF5FA7EC-4B8A-433E-8470-0EEC27B4E68A}
+		SolutionGuid = {0DD5D6AF-18FD-4D6F-889D-025A4F406A16}
 	EndGlobalSection
 EndGlobal
