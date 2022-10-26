@@ -3,56 +3,73 @@
     using System;
     
     class Person
-    {
-        public int age;
-        public string name;
-        public string surname;
+{
+    public int age;
+    public string name;
+    public string surname;
 
-        public Person(int age, string name, string surname)
-        {
-            this.age = age;
-            this.name = name;
-            this.surname = surname;
-        }
-        public Person()
-        {
-            age = 21;
-            name = "Joash";
-            surname = "Lebovsky";
-        }
-    }
-    struct Koordinates
+    public Person(int age, string name, string surname)
     {
-        public double x;
-        public double y;   
-        public double z;
-        public Koordinates(double x, double y, double z)
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
+        this.age = age;
+        this.name = name;
+        this.surname = surname;
     }
-    class Program
+    public Person()
     {
-        public static void Main()
-        {
-            void Print()
-            {
-                Person Joash = new Person();
-                Console.WriteLine($"{Joash.name} {Joash.surname} is {Joash.age} years old");
-            }
-            Print();
-            void length(double x1, double y1, double z1, double x2, double y2, double z2)
-            {
-                Koordinates point1 = new(x1, y1, z1);
-                Koordinates point2 = new(x2, y2, z2);
-                double k = Math.Sqrt(Math.Pow((point1.x - point2.x), 2) + Math.Pow((point1.y - point2.y), 2) + Math.Pow((point1.z - point2.z), 2));
-                Console.WriteLine($"Расстояние между точками - {k}");
-            }
-            length(0,0,0,0,0,0);
-        }
-
+        age = 21;
+        name = "Joash";
+        surname = "Lebovsky";
     }
 }
+struct Koordinates
+{
+    public double x;
+    public double y;
+    public double z;
+    public Koordinates(double x, double y, double z)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+}
+class Program
+{
+    public static void Print()
+    {
+        Person Joash = new Person();
+        Console.WriteLine($"{Joash.name} {Joash.surname} is {Joash.age} years old");
+    }
+    public static void length(Koordinates a, Koordinates b)
+    {
+        double k = Math.Sqrt(Math.Pow((a.x - b.x), 2) + Math.Pow((a.y - b.y), 2) + Math.Pow((a.z - b.z), 2));
+        Console.WriteLine($"Расстояние между точками - {k}");
+    }
+    public static void Main(string[] args)
+    {
+        Print();
+        Console.WriteLine("Координаты первой точки");
+        string line = Console.ReadLine();
+        string[] splitString = line.Split(' ');
+
+        double x1 = Convert.ToDouble(splitString[0]);
+        double y1 = Convert.ToDouble(splitString[1]);
+        double z1 = Convert.ToDouble(splitString[2]);
+
+        Console.WriteLine("Координаты второй точки");
+        string line2 = Console.ReadLine();
+        string[] splitString2 = line2.Split(' ');
+
+        double x2 = Convert.ToDouble(splitString2[0]);
+        double y2 = Convert.ToDouble(splitString2[1]);
+        double z2 = Convert.ToDouble(splitString2[2]);
+
+        Koordinates point1 = new(x1, y1, z1);
+        Koordinates point2 = new(x2, y2, z2);
+        length(point1, point2);
+    }
+
+}
+}
+        
     
