@@ -11,7 +11,9 @@ namespace HomeWork2
 
         public Person()
         {
-
+            age = 10;
+            name = "Someone";
+            surname = "Something";
         }
 
         public Person(int a1, string? a2, string? a3)
