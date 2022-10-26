@@ -10,25 +10,25 @@ namespace HW_3
 
         public Person(int age, string name, string surname)
         {
-            this._age = age;
-            this._name = name;
-            this._surname = surname;
+            _age = age;
+            _name = name;
+            _surname = surname;
         }
 
         public Person()
         {
-            this._age = 15;
-            this._name = "Boleslava";
-            this._surname = "Joash";
+            _age = 15;
+            _name = "Boleslava";
+            _surname = "Joash";
         }
     }
     
     internal class Program
     {
         
-        static void MyOutput(Person A)
+        static void MyOutput(Person myPerson)
         {
-            Console.WriteLine("{0} {1} is {2} years old", A._surname, A._name, A._age);
+            Console.WriteLine("{0} {1} is {2} years old", myPerson._surname, myPerson._name, myPerson._age);
         }
 
         static void Main(string[] args)
