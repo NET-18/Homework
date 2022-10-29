@@ -4,8 +4,7 @@ public class Student
 {
     private short _course;
     private short _group;
-    
-    public readonly Person person;
+    private Person _person;
 
     public string? University { get; set; }
     public string? Faculty { get; set; }
@@ -41,6 +40,19 @@ public class Student
         }
     }
 
+    public Person Person
+    {
+        get => this._person;
+        set
+        {
+            if (value.Age < 8)
+            {
+                throw new ArgumentException("You are alien. I am scared.", nameof(_person.Age));
+            }
+
+            this._person = (Person)value.Clone();
+        }
+    }
     public Student(Person person, string? university, string faculty, short course, string department, short group)
     {
         if (person.Age < 8)
@@ -48,7 +60,7 @@ public class Student
             throw new ArgumentException("You are alien. I am scared.", nameof(person.Age));
         }
         
-        this.person = (Person)person.Clone();
+        this._person = (Person)person.Clone();
         this.Course = course;
         this.University = university;
         this.Faculty = faculty;

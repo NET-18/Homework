@@ -7,8 +7,8 @@ public class Employee
    
     private decimal _monthlySalary;
     private short _experience;
-
-    public readonly Person person;
+    private Person _person;
+    
     public string? PlaceOfWork { get; set; } 
     public string? Position { get; set; }
     public bool Expellede { get; set; } = false;
@@ -42,7 +42,7 @@ public class Employee
                 throw new ArgumentException("Experience cannot be negative number.", nameof(this._experience));
             }
 
-            if ((this.person.Age - value) < 14)
+            if (this._person.Age - value < 14)
             {
                 throw new ArgumentException("You are slave. Sorry", nameof(this._experience));
             }
@@ -51,6 +51,19 @@ public class Employee
         }
     }
 
+    public Person Person
+    {
+        get => this._person;
+        set
+        {
+            if (value.Age < 14)
+            {
+                throw new ArgumentException("You are slave. Sorry", nameof(_person.Age));
+            }
+
+            this._person = (Person)value.Clone();
+        }
+    }
     public Employee(Person person, string? placeOfWork, string? position, short experience, decimal monthlySalary)
     {
         if (person.Age < 14)
@@ -58,7 +71,7 @@ public class Employee
             throw new ArgumentException("You are slave. Sorry", nameof(person.Age));
         }
 
-        this.person = (Person)person.Clone();
+        this._person = (Person)person.Clone();
         this.PlaceOfWork = placeOfWork;
         this.Position = position;
         this.Experience = experience;

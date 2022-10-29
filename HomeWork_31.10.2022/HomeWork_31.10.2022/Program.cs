@@ -37,7 +37,7 @@
         private static void PrintInfoAboutStudent(Student student)
         {
             Console.WriteLine("Print info about student");
-            PrintInfoAboutPerson(student.person);
+            PrintInfoAboutPerson(student.Person);
             if (student.Expellede)
             {
                 Console.WriteLine("He/she is expelled.");
@@ -55,7 +55,7 @@
         private static void PrintInfoAboutEmployee(Employee employee)
         {
             Console.WriteLine("Print info about employee");
-            PrintInfoAboutPerson(employee.person);
+            PrintInfoAboutPerson(employee.Person);
             if (employee.Expellede)
             {
                 Console.WriteLine("He/she is expelled.");
