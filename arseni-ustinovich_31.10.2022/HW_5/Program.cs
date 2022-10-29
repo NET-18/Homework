@@ -12,7 +12,7 @@ namespace HW_5
         { 
             get 
             { 
-                if (Age == -1) 
+                if (Age <= -1) 
                 { 
                     return "Unknown"; 
                 }
@@ -34,13 +34,14 @@ namespace HW_5
     } 
     public class Student
     {
+        private string _grants;
         public Person Person { get; set; }
         public int Course { get; set; }
         public string StringCourse 
         {
             get
             {
-                if (Course == -1)
+                if (Course <= -1)
                 {
                     return "Unknown";
                 }
@@ -51,7 +52,24 @@ namespace HW_5
             }
         }
         public string Department { get; set; }
-        public  string Grants { get; set; }
+        public  string Grants
+        {
+            get
+            {
+                return _grants;
+            }
+            set
+            {
+                if (value.ToLower() != "fee-paying" || value.ToLower() != "free")
+                {
+                    _grants = "Unknown";
+                }
+                else
+                {
+                    _grants = value;
+                }
+            }
+        }
         public Student(Person person, int course, string department, string grants)
         {
             Person = person;
@@ -69,7 +87,7 @@ namespace HW_5
         {
             get
             {
-                if (MonthSalary == -1)
+                if (MonthSalary <= -1)
                 {
                     return "Unknown";
                 }
@@ -181,10 +199,10 @@ namespace HW_5
             
             EmployeeInfo(myEmployee);
             Console.WriteLine();
-            
-            int RisingSalary = 90;
-            Console.WriteLine("Rising salary is about {0}%", RisingSalary);
-            WageInc(myEmployee, 90);
+
+            int risingSalary = 90;
+            Console.WriteLine("Rising salary is about {0}%", risingSalary);
+            WageInc(myEmployee, risingSalary);
             EmployeeInfo(myEmployee);
             Console.WriteLine();
 
