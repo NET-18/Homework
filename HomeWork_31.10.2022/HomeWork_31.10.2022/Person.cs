@@ -60,7 +60,7 @@ public class Person: ICloneable
                 throw new ArgumentNullException(nameof(this._gender), "It's cannot be null or empty.");
             }
             
-            if (!string.Equals(value?.ToLowerInvariant(), "male") && !string.Equals(value?.ToLowerInvariant(), "female"))
+            if (!string.Equals(value?.ToLowerInvariant(), "male", StringComparison.OrdinalIgnoreCase) && !string.Equals(value?.ToLowerInvariant(), "female", StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException("It's not a gender stupid bitch!", nameof(this._gender));
             }

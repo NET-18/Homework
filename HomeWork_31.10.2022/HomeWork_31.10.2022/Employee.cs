@@ -18,14 +18,11 @@ public class Employee
         get => this._monthlySalary;
         set
         {
-            switch (value)
+            if (value < 150.0m)
             {
-                case <= 0.0m:
-                    throw new ArgumentException("Salary cannot be not a positive!", nameof(this._monthlySalary));
-                case < 150.0m:
-                    throw new ArgumentException(
-                        "It's very small salary(cannot be less than 150$). It's not normal. Change place of work or your manager!!",
-                        nameof(this._monthlySalary));
+                throw new ArgumentException(
+                    "It's very small salary(cannot be less than 150$). It's not normal. Change place of work or your manager!!",
+                    nameof(this._monthlySalary));
             }
 
             this._monthlySalary = value;
