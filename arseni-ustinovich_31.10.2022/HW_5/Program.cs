@@ -102,7 +102,7 @@ namespace HW_5
         {
             get
             {
-                if (Exp == -1)
+                if (Exp <= -1)
                 {
                     return "Unknown";
                 }
