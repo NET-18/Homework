@@ -12,8 +12,6 @@
               Console.WriteLine(person.Name);
               Console.WriteLine(person.surname);
               Console.WriteLine(person.age);
-            
-
          }
        
     }
