@@ -14,12 +14,12 @@ namespace ConsoleApp1
 
 
 
-        public Person(string Name, string Surname, string Gender, int Age)
+        public Person(string name, string surname, string gender, int age)
         {
-            _name = Name;
-            _surname = Surname;
-            _gender = Gender;
-            _intage = Age;
+            _name = name;
+            _surname = surname;
+            _gender = gender;
+            _intage = age;
         }
         public Person() : this("Unknown", "Unknown", "Unknown", -1) { }
 
@@ -52,12 +52,12 @@ namespace ConsoleApp1
         public int _course { get; set; }
         public string _faculty { get; set; }
 
-        public Student(Person person, string University, int Course, string Faculty)
+        public Student(Person person, string university, int course, string faculty)
         {
             Person = person;
-            _university = University;
-            _course = Course;
-            _faculty = Faculty;
+            _university = university;
+            _course = course;
+            _faculty = faculty;
 
         }
         public string GetCourse()
@@ -85,25 +85,15 @@ namespace ConsoleApp1
         public string _job { get; set; }
         public double _salarymonth { get; set; }
         public double _experience { get; set; }
-
-
-        public Employee(Person person, string Job, double Salarymonth, double Experience)
+        public Employee(Person person, string job, double salarymonth, double experience)
         {
             Person = person;
-            _job = Job;
-            _salarymonth = Salarymonth;
-            _experience = Experience;
+            _job = job;
+            _salarymonth = salarymonth;
+            _experience = experience;
         }
-
-
         public Employee() : this(new(), "Unknown", -1, -1) { }
     }
-
-
-
-
-
-
 
     internal class Program
     {
@@ -159,7 +149,6 @@ namespace ConsoleApp1
             return new();
         }
 
-
         static void Main(string[] args)
         {
             Person a = new()
@@ -169,7 +158,6 @@ namespace ConsoleApp1
                 _intage = 24,
                 _gender = "Мужыыык",
             };
-
             Student b = new()
             {
                 Person = new()
@@ -182,10 +170,7 @@ namespace ConsoleApp1
                 _course = 6,
                 _faculty = "ПСФ",
                 _university = "БНТУ",
-
-
             };
-
             Employee c = new()
             {
                 Person = new()
@@ -198,33 +183,15 @@ namespace ConsoleApp1
                 _experience = 4,
                 _job = "директором твиттера",
                 _salarymonth = 500,
-
             };
-
-
             PersonOutput(a);
             StudentOutput(b);
             EmployeeOutput(c);
             SalaryIncrease(c);
-
             b = StudentDeduction();
             Console.WriteLine($"{b._course}");
-
             c = EmployeeDeduction();
             Console.WriteLine($"{c.Person._name}");
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
