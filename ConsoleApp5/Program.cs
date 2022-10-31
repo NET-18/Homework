@@ -18,7 +18,7 @@
         {
             age = 21;
             name = "Joash";
-            surname = "Lebovsky";
+            surname = "Lebovsky2";
         }
     }
     struct Koordinates
