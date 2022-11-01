@@ -68,7 +68,6 @@ public class Person: ICloneable
             this._gender = value;
         }
     }
-    public Person() { }
 
     public Person(string? name, string? surname, short age, short height, float weight, string? gender)
     {
@@ -80,6 +79,16 @@ public class Person: ICloneable
         this.Gender = gender;
     }
 
+    public Person(Person person)
+    {
+        this.Name = person.Name;
+        this.Surname = person.Surname;
+        this.Age = person.Age;
+        this.Height = person.Height;
+        this.Weight = person.Weight;
+        this.Gender = person.Gender;
+    }
+
     public void Eat()
     {
         this.Weight += 0.7f;
@@ -88,6 +97,11 @@ public class Person: ICloneable
     public void Poop()
     {
         this.Weight -= 0.5f;
+    }
+
+    public virtual void PrintType()
+    {
+        Console.WriteLine("I am just person.");
     }
 
     public object Clone()

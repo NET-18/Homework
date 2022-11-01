@@ -2,12 +2,11 @@ namespace HomeWork_31_10_2022;
 
 using System.Runtime.CompilerServices;
 
-public class Employee
+public class Employee : Person
 {
    
     private decimal _monthlySalary;
     private short _experience;
-    private Person _person;
     
     public string? PlaceOfWork { get; set; } 
     public string? Position { get; set; }
@@ -39,7 +38,7 @@ public class Employee
                 throw new ArgumentException("Experience cannot be negative number.", nameof(this._experience));
             }
 
-            if (this._person.Age - value < 14)
+            if (this.Age - value < 14)
             {
                 throw new ArgumentException("You are slave. Sorry", nameof(this._experience));
             }
@@ -47,31 +46,22 @@ public class Employee
             this._experience = value;
         }
     }
-
-    public Person Person
-    {
-        get => this._person;
-        set
-        {
-            if (value.Age < 14)
-            {
-                throw new ArgumentException("You are slave. Sorry", nameof(_person.Age));
-            }
-
-            this._person = (Person)value.Clone();
-        }
-    }
-    public Employee(Person person, string? placeOfWork, string? position, short experience, decimal monthlySalary)
+    
+    public Employee(Person person, string? placeOfWork, string? position, short experience, decimal monthlySalary) : base(person)
     {
         if (person.Age < 14)
         {
             throw new ArgumentException("You are slave. Sorry", nameof(person.Age));
         }
 
-        this._person = (Person)person.Clone();
         this.PlaceOfWork = placeOfWork;
         this.Position = position;
         this.Experience = experience;
         this.MonthlySalary = monthlySalary;
+    }
+    
+    public override void PrintType()
+    {
+        Console.WriteLine("I am employee.");
     }
 }

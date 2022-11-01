@@ -1,10 +1,9 @@
 namespace HomeWork_31_10_2022;
 
-public class Student
+public class Student : Person
 {
     private short _course;
     private short _group;
-    private Person _person;
 
     public string? University { get; set; }
     public string? Faculty { get; set; }
@@ -39,33 +38,22 @@ public class Student
             this._group = value;
         }
     }
-
-    public Person Person
-    {
-        get => this._person;
-        set
-        {
-            if (value.Age < 8)
-            {
-                throw new ArgumentException("You are alien. I am scared.", nameof(_person.Age));
-            }
-
-            this._person = (Person)value.Clone();
-        }
-    }
-    public Student(Person person, string? university, string faculty, short course, string department, short group)
+    public Student(Person person, string? university, string faculty, short course, string department, short group) : base(person)
     {
         if (person.Age < 8)
         {
             throw new ArgumentException("You are alien. I am scared.", nameof(person.Age));
         }
-        
-        this._person = (Person)person.Clone();
         this.Course = course;
         this.University = university;
         this.Faculty = faculty;
         this.Department = department;
         this.Group = group;
+    }
+
+    public override void PrintType()
+    {
+        Console.WriteLine("I am student.");
     }
 
     public void GoToLesson()

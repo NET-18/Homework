@@ -13,14 +13,11 @@
             Employee meAsEmployee = new Employee(me, "Amazing company", "Middle .NET Developer", 3, 1200);
             PrintInfoAboutEmployee(meAsEmployee);
             Console.WriteLine();
-            SalaryIncrease(meAsEmployee, 10);
-            PrintInfoAboutEmployee(meAsEmployee);
+            me.PrintType();
             Console.WriteLine();
-            DismissStudent(alsoMe);
-            PrintInfoAboutStudent(alsoMe);
+            alsoMe.PrintType();
             Console.WriteLine();
-            DismissEmployee(meAsEmployee);
-            PrintInfoAboutEmployee(meAsEmployee);
+            meAsEmployee.PrintType();
             Console.WriteLine();
         }
         
@@ -34,38 +31,16 @@
             Console.WriteLine($"Gender: {person.Gender}");
         }
 
-        private static void PrintInfoAboutStudent(Student student)
+        private static void PrintInfoAboutStudent(Person person)
         {
             Console.WriteLine("Print info about student");
-            PrintInfoAboutPerson(student.Person);
-            if (student.Expellede)
-            {
-                Console.WriteLine("He/she is expelled.");
-                return;
-            }
-
-            Console.WriteLine($"University: {student.University}");
-            Console.WriteLine($"Faculty: {student.Faculty}");
-            Console.WriteLine($"Course: {student.Course}");
-            Console.WriteLine($"Group: {student.Group}");
-            Console.WriteLine($"Department: {student.Department}");
-            Console.WriteLine($"Energy: {student.Energy}%");
+            PrintInfoAboutPerson(person);
         }
 
-        private static void PrintInfoAboutEmployee(Employee employee)
+        private static void PrintInfoAboutEmployee(Person person)
         {
             Console.WriteLine("Print info about employee");
-            PrintInfoAboutPerson(employee.Person);
-            if (employee.Expellede)
-            {
-                Console.WriteLine("He/she is expelled.");
-                return;
-            }
-
-            Console.WriteLine($"Place of work: {employee.PlaceOfWork}");
-            Console.WriteLine($"Position: {employee.Position}");
-            Console.WriteLine($"Monthly salary: {employee.MonthlySalary}$");
-            Console.WriteLine($"Experience: {employee.Experience} years");
+            PrintInfoAboutPerson(person);
         }
 
         private static void SalaryIncrease(Employee employee, short percent)
