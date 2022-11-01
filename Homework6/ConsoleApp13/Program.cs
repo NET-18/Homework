@@ -2,28 +2,51 @@
 
 namespace ConsoleApp13
 {
-    internal class Program
-    {
         class Person
         {
-            public string _name;
-            public string _surname;
-            public int _age;
+            public string _name { get; set; }
+            public string _surname { get; set; }
+            public int _age { get; set; }
+        public Person(string name, string surname, int age)
+        {
+            _name = name;
+            _surname = surname;
+            _age = age;
         }
+        public Person(): this("Deleted", "Deleted", -1) { }
+    }
         class Student
         {
-            public string _university;
-            public string _department;
-            public int _course;
-            public Person person1;
+            public string _university { get; set; }
+            public string _department { get; set; }
+            public int _course { get; set; }
+            public Person person1 { get; set; }
+        public Student(string university, string department, int course, Person person1)
+        {
+            _university = university;
+            _department = department;
+            _course = course;
+            this.person1 = person1;
         }
+        public Student(): this("Deleted", "Deleted", -1, new()) { }
+    }
         class Employee
         {
-            public string _job;
-            public int _salary;
-            public int _exp;
-            public Person person2;
+            public string _job { get; set; }
+            public int _salary { get; set; }
+            public int _exp { get; set; }
+            public Person person2 { get; set; }
+        public Employee(string job, int salary, int exp, Person person2)
+        {
+            _job = job;
+            _salary = salary;
+            _exp = exp;
+            this.person2 = person2;
         }
+        public Employee(): this("Deleted", -1, -1, new()){}
+    }
+    internal class Program
+    {
         static void Personinfo(Person person)
         {
             Console.WriteLine($"{person._name} {person._surname} is {person._age} years old");
@@ -42,7 +65,7 @@ namespace ConsoleApp13
             Console.WriteLine($"{employee.person2._name} has {employee._exp} years experience. Make his {employee._job} very well and got a salary {employee._salary}");
 
         }
-        static void salary(Employee employee)
+        static void Salary(Employee employee)
         {
             Console.WriteLine();
             Console.WriteLine($"Зарплата сотрудника {employee._salary} долларов");
@@ -59,19 +82,13 @@ namespace ConsoleApp13
                 Console.WriteLine("Так не бывает");
             }
         }
-        static void StudentDeduction(Student student)
+        static Student StudentDeduction()
         {
-            Console.WriteLine();
-            Console.WriteLine("Отчисляем студента");
-            StudentInfo(student);
-            Console.WriteLine("Отчислен с позором");
+            return new();
         }
-        static void EmployeeDefited(Employee employee)
+        static Employee EmployeeDefited()
         {
-            Console.WriteLine();
-            Console.WriteLine("Увольняем и точка.");
-            EmployeeInfo(employee);
-            Console.WriteLine("Уволен и забыт");
+            return new();
         }
         static void Main(string[] args)
         {
@@ -109,9 +126,12 @@ namespace ConsoleApp13
             Personinfo(p);
             StudentInfo(s);
             EmployeeInfo(d);
-            salary(d);
-            StudentDeduction(s);
-            EmployeeDefited(d);
+            Salary(d);
+            s = StudentDeduction();
+            Console.WriteLine($"{s.person1._surname}");
+            d = EmployeeDefited();
+            Console.WriteLine($"{d.person2._name}");
+
         }
     }
 }
