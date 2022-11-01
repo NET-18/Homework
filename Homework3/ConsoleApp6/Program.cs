@@ -2,23 +2,32 @@
 {
     internal class Program
     {
-        static void Print(string result)
+        public class Person
         {
-            Console.WriteLine(result);
+            public string _name;
+            public string _surname;
+            public int _age;
+            public Person()
+            {
+                _name = "pip";
+                _surname = "Mur";
+                _age = 14;
+            }
+            public Person(string name, string surname, int age)
+            {
+                _name = name;
+                _surname = surname;
+                _age = age;
+            }
         }
         static void Main(string[] args)
         {
-            Person josh = new Person();    
-            josh.name = "Josh";
-            josh.Surname = "Boleslava";
-            josh.age = 15;
-            Print($"{josh.Surname} {josh.name} is {josh.age} years old");
+            Person josh = new Person("Josh", "Baleslava", 15);    
+            Print(josh);
         }
-                class Person
+        static void Print(Person person)
         {
-            public string name = "hz";
-            public string Surname = "kz";
-            public int age;
-        }    
+            Console.WriteLine($"{person._surname} {person._name} is {person._age} years old");
+        }
     }
 }

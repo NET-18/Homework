@@ -1,38 +1,38 @@
-﻿namespace MysecondHomeWork
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace MysecondHomeWork
 {
     internal class Program
     {
+        struct Space
+        {
+            public double _x;
+            public double _y;
+            public double _z;
+        }
 
         static void Main(string[] args)
         {
             Space star = new Space();
-            Console.Write("Введите значение x для точки А");
-            star.x = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите значение у для точки А");
-            star.y = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите значение z для точки А");
-            star.z = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите значение x1 для точки B");
-            star.x1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите значение у1 для точки B");
-            star.y1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите значение z1 для точки B");
-            star.z1 = Convert.ToDouble(Console.ReadLine());
-            Rasst(star.x, star.y, star.z, star.x1, star.y1, star.z1);
+            Console.Write("Введите значение x для точки А: ");
+            star._x = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Введите значение у для точки А: ");
+            star._y = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Введите значение z для точки А: ");
+            star._z = Convert.ToDouble(Console.ReadLine());
+            Space cosmo = new Space();
+            Console.Write("Введите значение x для точки B: ");
+            cosmo._x = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Введите значение y для точки B: ");
+            cosmo._y = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Введите значение z для точки B: ");
+            cosmo._z = Convert.ToDouble(Console.ReadLine());
+            Rasst(cosmo, star);
         }
-        static void Rasst(double x, double y, double z, double x1, double y1, double z1)
+        static void Rasst(Space star, Space cosmo)
         {
-            double resXY = Math.Sqrt(Math.Pow(x1 - x, 2) + Math.Pow(y1 - y, 2) + Math.Pow(z1 - z, 2));
+            double resXY = Math.Sqrt(Math.Pow(cosmo._x - star._x, 2) + Math.Pow(cosmo._y - star._y, 2) + Math.Pow(cosmo._z - star._z, 2));
             Console.WriteLine("Расстояние между точками " + resXY);
-        }
-        struct Space
-        {
-            public double x;
-            public double y;
-            public double z;
-            public double x1;
-            public double y1;
-            public double z1;
         }
 
     }
