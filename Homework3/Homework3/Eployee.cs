@@ -15,6 +15,10 @@ namespace Homework3
             ExperienceInYears = experienceInYears;
 
         }
+        public override void print()
+        {
+            Console.WriteLine($" {Name} зарплата в час {WageInHour} зарплата в год {ExperienceInYears}");
+        }
 
         public int WageInMonth { get; set; }
         public int WageInHour { get; set; }

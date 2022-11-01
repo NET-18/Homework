@@ -14,6 +14,7 @@ namespace Homework3
             Course = course; 
             Department = department;
         }
+         
 
         public int Course { get; set; }
         public string Department { get; set; } 

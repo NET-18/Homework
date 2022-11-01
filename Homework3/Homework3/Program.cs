@@ -8,11 +8,15 @@ namespace Homework3
         {
             var person = new Person("nik", 15, "lish");
             var student = new Student("vlad", 16, "begl", 4, "hfg");
-            var eployee = new Eployee(100, 200, 300, "ghg", 20, "ghf");
-            eployee.AddSalary(100);
-            eployee.DeleteEployee(eployee);
-            student.DeleteStudent(student);
-            Console.WriteLine();
+            var eployee = new Eployee(100, 200, 300, "Nikita", 20, "Lis");
+            //.AddSalary(100);
+            //eployee.DeleteEployee(eployee);
+            //.DeleteStudent(student);
+            Person Nik = new Person("Nikita", 18 ,"Lish");
+            Nik.print();
+            eployee.print();
+
+            
         }
     }
 }
