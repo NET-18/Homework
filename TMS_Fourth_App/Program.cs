@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Xml.Linq;
-
-namespace TSM_Third_App
+﻿namespace TMS_Fourth_App
 {
     class Person
     {
@@ -10,16 +7,18 @@ namespace TSM_Third_App
         public string SurName { get; set; }
 
     }
-    class Studen
+    class Studen : Person
     {
         public string Course { get; set; }
-        public string Department { get;set; }
+        public string Department { get; set; }
+        public Person Person { get; set; }
     }
-    class Employee
+    class Employee : Person
     {
         public int SalaryInHour { get; set; }
-        public int SalaryInMonth { get; set;  }
+        public int SalaryInMonth { get; set; }
         public int Experience { get; set; }
+        public Person Person { get; set; }
     }
 
 
@@ -29,71 +28,53 @@ namespace TSM_Third_App
         {
             Console.WriteLine($"Имя: {person.Name} Фамилия: {person.SurName} Возраст: {person.Age}");
         }
-        static void InfAbStud(Person person, Studen studen)
+        static void InfAbStud(Studen studen)
         {
-            Console.WriteLine($"Имя: {person.Name} Фамилия: {person.SurName} Возраст: {person.Age} Курс: {studen.Course} Кафедра: {studen.Department}");
+            Console.WriteLine($"Имя: {studen.Name} Фамилия: {studen.SurName} Возраст: {studen.Age} Курс: {studen.Course} Кафедра: {studen.Department}");
         }
-        static void InfAbEmp(Person person, Employee employee)
+        static void InfAbEmp(Employee employee)
         {
-            Console.WriteLine($"Имя: {person.Name} Фамилия: {person.SurName} Возраст: {person.Age} Зарплата в час: {employee.SalaryInHour} Зарплата в месяц: {employee.SalaryInMonth} Стаж: {employee.Experience}");
+            Console.WriteLine($"Имя: {employee.Name} Фамилия: {employee.SurName} Возраст: {employee.Age} Зарплата в час: {employee.SalaryInHour} Зарплата в месяц: {employee.SalaryInMonth} Стаж: {employee.Experience}");
         }
         static void SalaryUp(Employee employee, int salaryUpProcent)
         {
             Console.WriteLine($"увеличенная зп: {employee.SalaryInMonth * (1 + salaryUpProcent / 100.0)}");
         }
-        static void DeleteStud(Person person, Studen student)
-        {
-            person = null;
-            student = null;
-        }
-        static void DeleteEmp(Person person, Employee employee)
-        {
-            person = null;
-            employee = null;
-        }
         static void Main(string[] args)
         {
             Console.WriteLine("Возраст, Имя, Фамилия");
-            Person person0 = new Person()
+            Person person = new Person()
             {
                 Age = int.Parse(Console.ReadLine()),
                 Name = Console.ReadLine(),
                 SurName = Console.ReadLine()
             };
             Console.WriteLine("Возраст, Имя, Фамилия, Курс, Факультет");
-            Person person1 = new Person()
+            Studen student = new Studen()
             {
                 Age = int.Parse(Console.ReadLine()),
                 Name = Console.ReadLine(),
-                SurName = Console.ReadLine()
-            };
-            Studen student = new Studen()
-            {
+                SurName = Console.ReadLine(),
                 Course = Console.ReadLine(),
                 Department = Console.ReadLine()
 
             };
             Console.WriteLine("Возраст, Имя, Фамилия, ЗП в час, ЗП в месяц, Опыт");
-            Person person2 = new Person()
+            Employee employee = new Employee()
             {
                 Age = int.Parse(Console.ReadLine()),
                 Name = Console.ReadLine(),
-                SurName = Console.ReadLine()
-            };
-            Employee employee = new Employee()
-            {
+                SurName = Console.ReadLine(),
                 SalaryInHour = int.Parse(Console.ReadLine()),
                 SalaryInMonth = int.Parse(Console.ReadLine()),
                 Experience = int.Parse(Console.ReadLine())
             };
-            InfAbHum(person0);
-            InfAbStud(person1, student);
-            InfAbEmp(person2, employee);
+            InfAbHum(person);
+            InfAbStud(student);
+            InfAbEmp(employee);
             Console.WriteLine("Процент для увеличения ЗП: ");
             SalaryUp(employee, int.Parse(Console.ReadLine()));
             Console.WriteLine();
-            DeleteStud(person1, student);
-            DeleteEmp(person2,employee);
         }
     }
 }
