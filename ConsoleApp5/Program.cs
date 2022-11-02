@@ -18,7 +18,7 @@
         {
             age = 21;
             name = "Joash";
-            surname = "Lebovsky2";
+            surname = "Lebovsky";
         }
     }
     struct Koordinates
@@ -39,7 +39,7 @@
         {
           Console.WriteLine($"{person.name} {person.surname} is {person.age} years old");
         }
-        public static void length(Koordinates a, Koordinates b)
+        public static void Length(Koordinates a, Koordinates b)
         {
             double k = Math.Sqrt(Math.Pow((a.x - b.x), 2) + Math.Pow((a.y - b.y), 2) + Math.Pow((a.z - b.z), 2));
             Console.WriteLine($"Расстояние между точками - {k}");
@@ -66,7 +66,7 @@
 
             Koordinates point1 = new(x1, y1, z1);
             Koordinates point2 = new(x2, y2, z2);
-            length(point1, point2);
+            Length(point1, point2);
         }
 
     }
