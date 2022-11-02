@@ -6,10 +6,10 @@ namespace ConsoleApp1
 
     public class Person
     {
-        public string _name;
-        public string _surname;
+        private string _name;
+        private string _surname;
         public int _intage;
-        public string _gender;
+        private string _gender;
 
         public string Name
         {
@@ -28,7 +28,7 @@ namespace ConsoleApp1
             get { return _gender; }
             set { _gender = value; }
         }
-      
+
         public string Age
         {
             get
@@ -58,9 +58,9 @@ namespace ConsoleApp1
     public class Student : Person
     {
 
-        public string _university;
+        private string _university;
         public int _course;
-        public string _faculty;
+        private string _faculty;
         public string University
         {
             get { return _university; }
@@ -98,9 +98,9 @@ namespace ConsoleApp1
 
     public class Employee : Person
     {
-        public string _job;
-        public double _salarymonth;
-        public double _experience;
+        private string _job;
+        private double _salarymonth;
+        private double _experience;
 
         public string Job
         {
@@ -144,7 +144,7 @@ namespace ConsoleApp1
             employee.EmployeeOutput();
 
             Person[] arr = new Person[] { person, student, employee };
-            foreach(Person p in arr)
+            foreach (Person p in arr)
             {
                 p.Virtual();
             }
