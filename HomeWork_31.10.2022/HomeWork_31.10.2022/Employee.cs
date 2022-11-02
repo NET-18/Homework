@@ -21,7 +21,7 @@ public class Employee : Person
             {
                 throw new ArgumentException(
                     "It's very small salary(cannot be less than 150$). It's not normal. Change place of work or your manager!!",
-                    nameof(this._monthlySalary));
+                    nameof(MonthlySalary));
             }
 
             this._monthlySalary = value;
@@ -35,12 +35,12 @@ public class Employee : Person
         {
             if (value < 0)
             {
-                throw new ArgumentException("Experience cannot be negative number.", nameof(this._experience));
+                throw new ArgumentException("Experience cannot be negative number.", nameof(Experience));
             }
 
             if (this.Age - value < 14)
             {
-                throw new ArgumentException("You are slave. Sorry", nameof(this._experience));
+                throw new ArgumentException("You are slave. Sorry", nameof(Experience));
             }
 
             this._experience = value;

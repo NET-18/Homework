@@ -7,16 +7,21 @@
             Person me = new Person("Sergey", "Yushkevich", 20, 176, 58.5f, "male");
             PrintInfoAboutPerson(me);
             Console.WriteLine();
+            
             Student alsoMe = new Student(me, "BSU", "MMF", 4, "Algebra", 1);
             PrintInfoAboutStudent(alsoMe);
             Console.WriteLine();
-            Employee meAsEmployee = new Employee(me, "Amazing company", "Middle .NET Developer", 3, 1200);
+            
+            Employee meAsEmployee = new Employee(me, "Amazing company", "Middle .NET Developer", 3, 3200);
             PrintInfoAboutEmployee(meAsEmployee);
             Console.WriteLine();
+            
             me.PrintType();
             Console.WriteLine();
+            
             alsoMe.PrintType();
             Console.WriteLine();
+            
             meAsEmployee.PrintType();
             Console.WriteLine();
         }
@@ -31,16 +36,16 @@
             Console.WriteLine($"Gender: {person.Gender}");
         }
 
-        private static void PrintInfoAboutStudent(Person person)
+        private static void PrintInfoAboutStudent(Student student)
         {
             Console.WriteLine("Print info about student");
-            PrintInfoAboutPerson(person);
+            PrintInfoAboutPerson(student);
         }
 
-        private static void PrintInfoAboutEmployee(Person person)
+        private static void PrintInfoAboutEmployee(Employee employee)
         {
             Console.WriteLine("Print info about employee");
-            PrintInfoAboutPerson(person);
+            PrintInfoAboutPerson(employee);
         }
 
         private static void SalaryIncrease(Employee employee, short percent)

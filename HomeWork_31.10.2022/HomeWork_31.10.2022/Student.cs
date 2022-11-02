@@ -18,7 +18,7 @@ public class Student : Person
         {
             if (value < 1 || value > 6)
             {
-                throw new ArgumentException("Course cannot be less than zero or more than 6.", nameof(_course));
+                throw new ArgumentException("Course cannot be less than zero or more than 6.", nameof(Course));
             }
 
             this._course = value;
@@ -32,7 +32,7 @@ public class Student : Person
         {
             if (value < 0 || value > 25)
             {
-                throw new ArgumentException("Course cannot be less than zero or more than 25.", nameof(this._group));
+                throw new ArgumentException("Course cannot be less than zero or more than 25.", nameof(Group));
             }
 
             this._group = value;

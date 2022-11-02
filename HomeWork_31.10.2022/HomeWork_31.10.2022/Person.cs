@@ -17,7 +17,7 @@ public class Person: ICloneable
         {
             if (value < 0 || value > 120)
             {
-                throw new ArgumentException("Age cannot be less than zero and more than 120", nameof(_age));
+                throw new ArgumentException("Age cannot be less than zero and more than 120", nameof(Age));
             }
 
             this._age = value;
@@ -30,7 +30,7 @@ public class Person: ICloneable
         {
             if (value < 0 || value > 260)
             {
-                throw new ArgumentException("Height cannot be less than zero and more than 260 cm", nameof(_height));
+                throw new ArgumentException("Height cannot be less than zero and more than 260 cm", nameof(Height));
             }
 
             this._height = value;
@@ -43,7 +43,7 @@ public class Person: ICloneable
         {
             if (value < 0 || value > 320)
             {
-                throw new ArgumentException("Weight cannot be less than zero and more than 320 kg", nameof(_weight));
+                throw new ArgumentException("Weight cannot be less than zero and more than 320 kg", nameof(Weight));
             }
 
             this._weight = value;
@@ -62,7 +62,7 @@ public class Person: ICloneable
             
             if (!string.Equals(value?.ToLowerInvariant(), "male", StringComparison.OrdinalIgnoreCase) && !string.Equals(value?.ToLowerInvariant(), "female", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException("It's not a gender stupid bitch!", nameof(this._gender));
+                throw new ArgumentException("It's not a gender stupid bitch!", nameof(Gender));
             }
 
             this._gender = value;
