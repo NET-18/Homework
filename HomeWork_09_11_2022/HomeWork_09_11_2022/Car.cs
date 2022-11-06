@@ -28,7 +28,7 @@ public class Car : IMovable
         get => this._countOfShift;
         set
         {
-            if (value is < 0 or > 7)
+            if (value is < 1 or > 8)
             {
                 throw new ArgumentException("Wrong count of shift.", nameof(CountOfShift));
             }
