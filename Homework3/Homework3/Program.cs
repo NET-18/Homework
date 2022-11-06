@@ -2,64 +2,21 @@
 {
     public class Person
     {
-        private string name;
-        private string surname;
-        private string age;
-        private string sex;
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-        public string Surname
-        {
-            get
-            {
-                return surname;
-            }
-            set
-            {
-                surname = value;
-            }
-        }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
         public int Age { get; set; }
-        public string Sex
-        {
-            get
-            {
-                return sex;
-            }
-            set
-            {
-                sex = value;
-            }
-        }
+        public string? Sex { get; set; }
     }
-    public class Employee : Person
+    public class Employee
     {
-        private string job;
         private int salary;
         private int raisePercent;
         private int experience;
 
-        public string Job
-        {
-            get
-            {
-                return job;
-            }
-            set
-            {
-                job = value;
-            }
-        }
+        public Person _person { get; set; }
+        public string? Job { get; set; }
+        public string? Company { get; set; }
         public int Experience
         {
             get
@@ -98,22 +55,12 @@
         public bool Fired { get; set; } = false;
     }
 
-    public class Student : Person
+    public class Student
     {
-        private string university;
-        public string University
-        {
-            get
-            {
-                return university;
-            }
-            set
-            {
-                university = value;
-            }
-        }
+        public string? University { get; set; }
         public int Course { get; set; }
         public bool Expelled { get; set; } = false;
+        public Person _person { get; set; }
     }
 
     internal class Program
@@ -130,11 +77,13 @@
             PrintPersonInfo(person);
 
             Employee employee = new Employee();
-            employee.Name = "Alex";
-            employee.Surname = "King";
-            employee.Age = 23;
-            employee.Sex = "female";
+            employee._person = person;
+            employee._person.Name = "Alex";
+            employee._person.Surname = "King";
+            employee._person.Age = 23;
+            employee._person.Sex = "female";
             employee.Job = "BDM";
+            employee.Company = "Onde";
             employee.Experience = 5;
             employee.Salary = 2000;
 
@@ -142,20 +91,19 @@
             employee.RaisePercent = Convert.ToInt32(Console.ReadLine());
             salaryRaise = employee.Salary + employee.RaisePercent * (employee.Salary / 100);
             PrintEmployeeInfo(employee);
+            Console.WriteLine("Future salary: ");
             Console.WriteLine($"{salaryRaise}$");
-            StatusEmployee(employee);
+
 
             Student student = new Student();
-            student.Name = "John";
-            student.Surname = "Green";
-            student.Age = 21;
-            student.Sex = "male";
+            student._person = person;
+            student._person.Name = "John";
+            student._person.Surname = "Green";
+            student._person.Age = 21;
+            student._person.Sex = "male";
             student.University = "BSU";
             student.Course = 3;
             PrintStudentInfo(student);
-            StatusStudent(student);
-
-
         }
         private static void PrintPersonInfo(Person person)
         {
@@ -164,7 +112,8 @@
 
         private static void PrintEmployeeInfo(Employee employee)
         {
-            Console.WriteLine($"Employee Info: {employee.Name} {employee.Surname}, {employee.Age} years old, {employee.Sex},  ");
+            StatusEmployee(employee);
+            Console.WriteLine($"Employee Info: {employee._person.Name} {employee._person.Surname}, {employee._person.Age} years old, {employee._person.Sex}, Employee is a {employee.Job} at {employee.Company}, monthly salary: {employee.Salary}$, working experience: {employee.Experience} years");
             if (employee.Fired)
             {
                 Console.WriteLine("Employee is fired.");
@@ -175,7 +124,8 @@
 
         private static void PrintStudentInfo(Student student)
         {
-            Console.WriteLine($"Student Info: {student.Name} {student.Surname}, {student.Age} years old, {student.Sex}, is studying at {student.University}, {student.Course} course");
+            StatusStudent(student);
+            Console.WriteLine($"Student Info: {student._person.Name} {student._person.Surname}, {student._person.Age} years old, {student._person.Sex}, Student is studying at {student.University}, {student.Course} course");
             if (student.Expelled)
             {
                 Console.WriteLine("Student is expelled.");
