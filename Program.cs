@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Surname { get; set; }
         public int Age { get; set; }
+
         public virtual void Print(Person person)
         {
             Console.WriteLine($"Человек {person.Name} {person.Surname}, {person.Gender} в возрасте {person.Age}");
@@ -15,8 +16,8 @@
         {
             Console.WriteLine("Это БАЗОВЫЙ МЕТОД НИКИТЫ!!!");
         }
-
     }
+
     public class Student : Person
     {
         public int Сourse { get; set; }
@@ -27,6 +28,7 @@
             Console.WriteLine("Это СТУДЕНТЕЧЕСКИЙ МЕТОД НИКИТЫ!!!");
         }
     }
+
     public class Employee : Person
     {
         public Double Salary { get; set; }
@@ -38,6 +40,7 @@
             Console.WriteLine("Это РАБОЧИЙ МЕТОД НИКИТЫ!!!");
         }
     }
+
     internal class Program
     {
         public static void PrintStudent(Student? student)
@@ -47,7 +50,9 @@
                 Console.WriteLine($"Студент отчислен");
             }
             else
+            {
                 Console.WriteLine($"Студент {student.Name} {student.Surname}, {student.Gender}, Учится на {student.Сourse} курсе на кафедре {student.Department}, Успеваемость на уровне {student.Progress} баллов из 10");
+            }
         }
         public static void PrintEmployee(Employee? employee)
         {
@@ -56,18 +61,17 @@
                 Console.WriteLine($"Сотрудник уволен");
             }
             else
+            {
                 Console.WriteLine($"Сотрудник {employee.Name} {employee.Surname}, {employee.Gender}, работает в должности {employee.Position}. Опыт работы {employee.Experience} лет, заработная плата в месяц - {employee.Salary} долл США");
+            }
         }
         public static void DeleteEmployee(Employee? employee)
         {
             employee.Salary = -1;
             employee.Experience = -1;
             employee.Position = null;
-            employee = null;
-            GC.Collect();
         }
         public static void DeleteStudent(Student? student)
-
         {
             student.Department = null;
             student.Сourse = -1;
@@ -127,7 +131,7 @@
 
             DeleteEmployee(Nikitaemployee);
             DeleteStudent(NikitaStudent);
-
+            
             Console.WriteLine();
 
             PrintEmployee(Nikitaemployee);
