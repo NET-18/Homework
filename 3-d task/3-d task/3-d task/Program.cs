@@ -7,14 +7,14 @@ namespace _3_d_task
         static void Main(string[] args)
         {
             Person[] people = Array.Empty<Person>();
-            while (true) 
+            while (true)
             {
                 switch (ShowMenu())
                 {
                     case 1:
                         Array.Resize(ref people, people.Length + 1);
                         people[people.Length - 1] = AddStudents();
-                        break;    
+                        break;
                     case 2:
                         Array.Resize(ref people, people.Length + 1);
                         people[people.Length - 1] = AddEmployers();
@@ -33,12 +33,12 @@ namespace _3_d_task
                     default:
                         return;
                 }
-                
+
             }
-            
+
         }
 
-         static int ShowMenu()
+        static int ShowMenu()
         {
             Console.WriteLine("\n1.Add Student\n2.Add Employee\n3.Show All\n4.Delete Person\n5.Add Salary\n6.Exit");
             int choice;
@@ -56,7 +56,7 @@ namespace _3_d_task
             }
         }
 
-        static Person[] DeletePerson(Person[] people) 
+        static Person[] DeletePerson(Person[] people)
         {
             ShowArray(people);
             Console.WriteLine("\nWhich person you want to delete? ");
@@ -73,7 +73,7 @@ namespace _3_d_task
             return people;
         }
 
-        static Person AddEmployers() 
+        static Person AddEmployers()
         {
             Console.WriteLine("\nEnter salary... ");
             double salary = Convert.ToDouble(Console.ReadLine());
@@ -91,7 +91,7 @@ namespace _3_d_task
             string surname = Console.ReadLine();
 
             Person employer = new Employee(salary, experience, name, surname, age);
-            return employer;       
+            return employer;
         }
 
         static Person AddStudents()
@@ -115,11 +115,15 @@ namespace _3_d_task
             return student;
         }
 
-        public static Person[] RaiseSalary(Person[] people) 
+        public static Person[] RaiseSalary(Person[] people)
         {
-            foreach (Person person in people) 
+            foreach (Person person in people)
             {
-                //как дать компилятору понять, какой объект Person в массиве имеет ссылку в хипе именно на Employee а не на Student?
+                Employee empl = person as Employee;
+                if (empl != null) 
+                {
+                    empl.Salary = empl.Salary * 1.1;
+                }
             }
             return people;
         }
