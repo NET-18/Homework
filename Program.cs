@@ -80,19 +80,19 @@
     }
     public static class Calculations
     {
-        public static void Delta(IMovable Movable1, IMovable Movable2)
+        public static void Delta(IMovable movable1, IMovable movable2)
         {
-            double d = Math.Sqrt(Math.Pow((Movable1.point.x - Movable2.point.x), 2) + Math.Pow((Movable1.point.y - Movable2.point.y), 2));
+            double d = Math.Sqrt(Math.Pow((movable1.point.x - movable2.point.x), 2) + Math.Pow((movable1.point.y - movable2.point.y), 2));
 
             Console.WriteLine($"Delta between Movable1 and Movable2 is {d}");
         }
-        public static void Move1To2(IMovable Movable1, IMovable Movable2)
+        public static void Move1To2(IMovable movable1, IMovable movable2)
         {
-            Movable1.Move(Movable2.point.x, Movable2.point.y);
+            movable1.Move(movable2.point.x, movable2.point.y);
         }
-        public static void Move2To1(IMovable Movable1, IMovable Movable2)
+        public static void Move2To1(IMovable movable1, IMovable movable2)
         {
-            Movable2.Move(Movable1.point.x, Movable1.point.y);
+            movable2.Move(movable1.point.x, movable1.point.y);
         }
     }
     public class Program
