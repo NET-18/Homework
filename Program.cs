@@ -4,6 +4,7 @@
     {
         public int x;
         public int y;
+
         public Point(int x, int y)
         {
             this.x = x; this.y = y;
@@ -17,23 +18,17 @@
     }
     public class Person : IMovable
     {
-        Point points = new Point();
-
+        
         public void Move(int x, int y)
         {
-            points.x = x;
-            points.y = y;
+            point = new Point(x, y);
         }
         public Point point
         {
             get
-            {
-                return points;
-            }
+            ;
             set
-            {
-                points = value;
-            }
+            ;
         }
     }
     public class Bike : IMovable
@@ -42,19 +37,12 @@
 
         public void Move(int x, int y)
         {
-            points.x = x;
-            points.y = y;
+            point = new Point(x, y);
         }
         public Point point
         {
-            get
-            {
-                return points;
-            }
-            set
-            {
-                points = value;
-            }
+            get;
+            set;
         }
 
     }
@@ -63,19 +51,12 @@
         Point points = new Point();
         public Point point
         {
-            get
-            {
-                return points;
-            }
-            set
-            {
-                points = value;
-            }
+            get;
+            set;
         }
         public void Move(int x, int y)
         {
-            points.x = x;
-            points.y = y;
+            point = new Point(x, y);
         }
     }
     public static class Calculations
