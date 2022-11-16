@@ -4,15 +4,10 @@
     {
         public static void Main(string[] args)
         {
-            var gun = new Gun();
-            var bazooka = new Bazooka();
-            var machine = new Machine();
-            var machineGun = new MachineGun();
-            
-            WeaponFactory.Create(gun, "PM", 1945);
-            WeaponFactory.Create(bazooka, "M1", 1942);
-            WeaponFactory.Create(machine, "AK-47", 1947);
-            WeaponFactory.Create(machineGun, "Czechoslovak", 1959);
+            var gun = WeaponHelper.Create<Gun>("PM", 1945);
+            var bazooka = WeaponHelper.Create<Bazooka>("M1", 1942);
+            var machine  = WeaponHelper.Create<Machine>("AK-47", 1947);
+            var machineGun = WeaponHelper.Create<MachineGun>("Czechoslovak", 1959);
             
             gun.Print();
             Console.WriteLine();
@@ -27,16 +22,16 @@
             Console.WriteLine();
 
             Console.Write("{0} makes shoot: ", gun.Name);
-            WeaponFactory.MakeShoot(gun);
+            WeaponHelper.MakeShoot(gun);
             
             Console.Write("{0} makes shoot: ", bazooka.Name);
-            WeaponFactory.MakeShoot(bazooka);
+            WeaponHelper.MakeShoot(bazooka);
             
             Console.Write("{0} makes shoot: ", machine.Name);
-            WeaponFactory.MakeShoot(machine);
+            WeaponHelper.MakeShoot(machine);
             
             Console.Write("{0} makes shoot: ", machineGun.Name);
-            WeaponFactory.MakeShoot(machineGun);
+            WeaponHelper.MakeShoot(machineGun);
         }
     }
 }
