@@ -36,6 +36,8 @@ class Program
             Console.WriteLine("There is no such element.");
         }
 
+        Console.WriteLine("\nIndex of number 4: {0}", myListOne.IndexOf(4));
+
         Console.WriteLine();
         for (var i = 0; i < myListTwo.Count; i++)
         {

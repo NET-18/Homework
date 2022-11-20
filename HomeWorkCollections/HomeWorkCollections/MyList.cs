@@ -104,11 +104,29 @@ public class MyList<T> : IEnumerable<T>
         this._data = new T[this._capacity];
     }
 
-    public bool Remove(T value)
+    public int IndexOf(T value)
     {
         if (value is null)
         {
-            throw new ArgumentNullException(nameof(value), "Value cannot be null.");
+            throw new ArgumentNullException(nameof(value), "Value is null");
+        }
+
+        for (var i = 0; i < _size; i++)
+        {
+            if (_data[i].Equals(value))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public bool Remove(T value)
+    {
+        if (!Contains(value))
+        {
+            return false;
         }
         
         var result = false;
@@ -123,11 +141,6 @@ public class MyList<T> : IEnumerable<T>
             }
         }
 
-        if (!result)
-        {
-            return result;
-        }
-
         for (var i = index; i < this._size - 1; i++)
         {
             (this._data[i], this._data[i + 1]) = (this._data[i + 1], this._data[i]);
@@ -138,6 +151,23 @@ public class MyList<T> : IEnumerable<T>
         return result;
     }
 
+    public bool Contains(T value)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(nameof(value), "Value is null.");
+        }
+        
+        for (int i = 0; i < _size; i++)
+        {
+            if (_data[i].Equals(value))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private static void Clone(T[] data1, T[] data2)
     {
         for (var i = 0; i < data2.Length; i++)
@@ -185,9 +215,6 @@ public class MyList<T> : IEnumerable<T>
             this.index = -1;
         }
         
-        public void Dispose()
-        {
-            Console.WriteLine("I don't know who is he...");
-        }
+        public void Dispose() { }
     }
 }
