@@ -23,6 +23,12 @@
             k1.Info();
             k1.Fire(40);
             k1.Info();
+
+            var p2 = ObjectFactory.Create<PistolMakarov>();
+            p2.Info();
+
+            var k2 = ObjectFactory.Create<AK47>();
+            k2.Info();
         }
     }
 }
