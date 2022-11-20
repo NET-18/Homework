@@ -4,14 +4,14 @@
     {
         static void Main(string[] args)
         {
-            var p1 = WeaponFactory.Create<PistolMakarov>();
-            var k1 = WeaponFactory.Create <AK47>();
+            var p1 = WeaponFactory.Create<PistolMakarov>(8);
+            var k1 = WeaponFactory.Create <AK47>(30);
 
             p1.Info();
             k1.Info();
 
             p1.Loading(6);
-            k1.Loading(30);
+            k1.Loading(35);
 
             p1.Info();
             k1.Info();

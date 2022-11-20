@@ -14,6 +14,10 @@ namespace homework_16._11._2022
 
         public override void Info()
         {
+            if (Load > MaxLoad)
+            {
+                Load = MaxLoad;
+            }
             Console.WriteLine("I'm Kalash, my Load is {0}, my max Load is {1}, my Rate Of Fire is {2}", Load, MaxLoad, RateOfFire);
         }
        

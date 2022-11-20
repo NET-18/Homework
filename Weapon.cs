@@ -13,27 +13,22 @@ namespace homework_16._11._2022
         public abstract int RateOfFire { get; set; }
         public virtual void Loading(int x)
         {
-
-            for (; x > 0; x--)
-            {
-                Load += 1;
-                if (Load >= MaxLoad)
-                {
-                    x--;
-                    break;
-                }
-            }
-
-            if (x == 0)
+            Load = Load + x;
+            
+            if (MaxLoad == Load)
             {
                 Console.WriteLine("no bullets left");
             }
 
-            if (Load == MaxLoad)
+            if (Load > MaxLoad)
             {
-                Console.WriteLine("Load = MaxLoad, {0} bullets left", x);
+                Console.WriteLine("Load = MaxLoad, {0} bullets left", Load - MaxLoad);
+                Load = MaxLoad;
             }
-            Console.WriteLine("Load =  {0}", Load);
+            else
+            {
+                Console.WriteLine("Load =  {0}", Load);
+            }
         }
         public virtual void Fire(int x)
         {
@@ -50,7 +45,6 @@ namespace homework_16._11._2022
                 }
             }
         }
-
         public abstract void Info();
     }
 }

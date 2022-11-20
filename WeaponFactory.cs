@@ -8,22 +8,15 @@ namespace homework_16._11._2022
 {
     internal class WeaponFactory
     {
-        public static T Create<T>() where T : Weapon, new()
+        public static T Create<T>(int maxLoad) where T : Weapon, new()
         {
             var result = new T()
             {
                 RateOfFire = 1,
-                Load = 0
+                Load = 0,
+                MaxLoad = maxLoad
             };
-            if (result is PistolMakarov)
-            {
-                result.MaxLoad = 8;
-            }
-            if (result is AK47)
-            {
-                result.MaxLoad = 30;
-            }
-                return result;
+            return result;
         }
    
     }
