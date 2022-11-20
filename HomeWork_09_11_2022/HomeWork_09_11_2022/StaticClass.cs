@@ -3,6 +3,6 @@ namespace HomeWork_09_11_2022;
 public static class StaticClass
 {
     public static double Distance(IMovable first, IMovable second) =>
-        Math.Sqrt(Math.Pow(first.Coord.GetX() - second.Coord.GetX(), 2) +
-                  Math.Pow(first.Coord.GetY() - second.Coord.GetY(), 2));
+        Math.Sqrt(Math.Pow(first.Coord.X - second.Coord.X, 2) +
+                  Math.Pow(first.Coord.Y - second.Coord.Y, 2));
 }

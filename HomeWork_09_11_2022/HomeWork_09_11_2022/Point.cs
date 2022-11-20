@@ -2,20 +2,17 @@ namespace HomeWork_09_11_2022;
 
 public struct Point
 {
-    private double x;
-    private double y;
-
     public Point(double x, double y)
     {
-        this.x = x;
-        this.y = y;
+        X = x;
+        Y = y;
     }
 
-    public double GetX() => this.x;
+    public double X { get; }
 
-    public double GetY() => this.y;
+    public double Y { get; }
 
-    public override string ToString() => $"X: {this.x} \nY: {this.y}";
+    public override string ToString() => $"X: {X} \nY: {Y}";
 
     public override bool Equals(object? obj)
     {
@@ -24,6 +21,6 @@ public struct Point
             return false;
         }
 
-        return (point.x == this.x) && (point.y == this.y);
+        return (point.X == this.X) && (point.Y == this.Y);
     }
 }
