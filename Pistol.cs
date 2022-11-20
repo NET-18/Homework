@@ -12,7 +12,7 @@ namespace homework_16._11._2022
         public override int Load { get; set; } = 0;
         public override int RateOfFire { get; set; } = 1;
 
-        public override void DoStuff()
+        public override void Info()
         {
             Console.WriteLine("I'm Makarov, my Load is {0}, my max Load is {1}, my Rate Of Fire is {2}", Load, MaxLoad, RateOfFire);
         }

@@ -41,6 +41,6 @@ namespace homework_16._11._2022
             Console.WriteLine("I fired {0} times", x);
             Console.WriteLine("Load =  {0}", Load);
         }
-        public abstract void DoStuff();
+        public abstract void Info();
     }
 }

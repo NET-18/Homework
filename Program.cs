@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             var p = new PistolMakarov();
-            var k = new Kalash();
+            var k = new AK47();
             WeaponFactory.Create(p);
             WeaponFactory.Create(k);
         }

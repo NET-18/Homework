@@ -16,11 +16,11 @@ namespace homework_16._11._2022
             {
                 weapon.MaxLoad = 8;
             }
-            if (weapon is Kalash)
+            if (weapon is AK47)
             {
                 weapon.MaxLoad = 30;
             }
-            weapon.DoStuff();
+            weapon.Info();
         }
     }
 }
