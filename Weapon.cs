@@ -37,10 +37,20 @@ namespace homework_16._11._2022
         }
         public virtual void Fire(int x)
         {
-            Load -= RateOfFire * x;
-            Console.WriteLine("I fired {0} times", x);
-            Console.WriteLine("Load =  {0}", Load);
+            Console.WriteLine("Weapon Is Fire!!!");
+            for (int i = 1; i <= x; i++)
+            {
+                Load -= RateOfFire;
+                Console.WriteLine("I fire {0} time", i);
+                Console.WriteLine("Load =  {0}", Load);
+                if (Load == 0)
+                {
+                    Console.WriteLine("No more bullets");
+                    break;
+                }
+            }
         }
+
         public abstract void Info();
     }
 }
