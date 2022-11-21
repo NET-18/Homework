@@ -1,5 +1,6 @@
 ﻿using System.Threading.Channels;
 using HomeWorkCollections;
+using DriveType = HomeWorkCollections.DriveType;
 
 class Program
 {
@@ -82,13 +83,13 @@ class Program
             Console.WriteLine("List is empty.");
         }
 
-        Laptop laptop1 = new Laptop(1100, "M1", 512, null, 8, 1.29f, "Mac OS", true, 13.3f,
+        Laptop laptop1 = new Laptop(1100, "M1", DriveType.SSD, new Tuple<int, int>(512, 0), 8, 1.29f, "Mac OS", true, 13.3f,
             "IPS", "Apple Macbook Air", "Midnight blue");
-        Laptop laptop2 = new Laptop(1250, "Intel core i7", 256, 1028, 16, 1.56f, "Windows", false, 15.6f,
+        Laptop laptop2 = new Laptop(1250, "Intel core i7", DriveType.SSD | DriveType.HDD, new Tuple<int, int>(128, 1028), 16, 1.56f, "Windows", false, 15.6f,
             "IPS", "Dell", "Grey");
-        Laptop laptop3 = new Laptop(900, "AMD Ryzen 5", 256, 512, 16, 2.2f, "Linux", false, 14.2f,
+        Laptop laptop3 = new Laptop(900, "AMD Ryzen 5", DriveType.SSD | DriveType.HDD, new Tuple<int, int>(256, 512), 16, 2.2f, "Linux", false, 14.2f,
             "TN+Film", "HP", "Blue");
-        Laptop laptop4 = new Laptop(1500, "M1", 1028, null, 16, 1.44f, "Mac OS", true, 14.5f,
+        Laptop laptop4 = new Laptop(1500, "M1", DriveType.SSD , new Tuple<int, int>(1028, 0), 16, 1.44f, "Mac OS", true, 14.5f,
             "IPS", "Apple Macbook Pro", "Space grey");
         
         List<Laptop> listOfLaptops = new List<Laptop>() { laptop2, laptop3, laptop4, laptop1 };

@@ -4,8 +4,6 @@ public class Laptop : IComparable
 {
     private decimal _cost;
     private int _ram;
-    private int? _ssd;
-    private int? _hdd;
     private float _weight;
     private float _diagonal;
 
@@ -15,6 +13,9 @@ public class Laptop : IComparable
     public string Processor { get; set; }
     public string ScreenTechnology { get; set; }
     public bool KeyboardBacklight { get; set; }
+    public int SSD { get; }
+    public int HDD { get; }
+    public DriveType DriveType { get; }
 
     public decimal Cost
     {
@@ -43,35 +44,7 @@ public class Laptop : IComparable
             this._ram = value;
         }
     }
-    
-    public int? SSD
-    {
-        get => _ssd;
-        set
-        {
-            if (value < 0 || value > 16000)
-            {
-                throw new ArgumentException("SSD cannot be less than zero or more than 16tb.", nameof(SSD));
-            }
 
-            this._ssd = value;
-        }
-    }
-    
-    public int? HDD
-    {
-        get => _hdd;
-        set
-        {
-            if (value < 0 || value > 16000)
-            {
-                throw new ArgumentException("HDD cannot be less than zero or more than 16tb.", nameof(HDD));
-            }
-
-            this._hdd = value;
-        }
-    }
-    
     public float Weight
     {
         get => _weight;
@@ -100,14 +73,15 @@ public class Laptop : IComparable
         }
     }
 
-    public Laptop(int cost, string processor, int? ssd, int? hdd, int ram, float weight, string os,
+    public Laptop(int cost, string processor, DriveType driveType, Tuple<int, int> capacityOfStorage, int ram, float weight, string os,
         bool keyboardBacklight, float diagonal,
         string screenTechnology, string product, string color)
     {
         Cost = cost;
         Processor = processor;
-        SSD = ssd;
-        HDD = hdd;
+        DriveType = driveType;
+        SSD = capacityOfStorage.Item1;
+        HDD = capacityOfStorage.Item2;
         RAM = ram;
         Weight = weight;
         OS = os;
@@ -138,8 +112,8 @@ public class Laptop : IComparable
                $"\nCost: {Cost}$" +
                $"\nProcessor: {Processor}" +
                $"\nOS: {OS}" +
-               $"\nSSD: {SSD ?? 0} gb" +
-               $"\nHDD: {HDD ?? 0} gb" +
+               $"\nSSD: {((DriveType & DriveType.SSD) == DriveType.SSD ? SSD : 0)} gb" +
+               $"\nHDD: {((DriveType & DriveType.HDD) == DriveType.HDD ? HDD : 0)} gb" +
                $"\nRAM: {RAM} gb" +
                $"\nWeight: {Weight} kg" +
                $"\nDiagonal: {Diagonal} inch" +
