@@ -21,20 +21,21 @@ public class MyList<T> : IEnumerable<T>
     {
         this._size = data.Length;
         int power = 0, buffer = _size;
-        var flag = false;
+        var remainderOfTheDivision = false;
         
+        //Check size of data is power of 2. If true, capacity equals size, else makes capacity power of 2 and more than size of data. 
         while (buffer / 2 != 0)
         {
-            if (!flag)
+            if (!remainderOfTheDivision)
             {
-                flag = buffer % 2 == 1;
+                remainderOfTheDivision = buffer % 2 == 1;
             }
 
             power++;
             buffer /= 2;
         }
 
-        this._capacity = flag ? (int)Math.Pow(2, power + 1) : (int)Math.Pow(2, power);
+        this._capacity = remainderOfTheDivision ? (int)Math.Pow(2, power + 1) : _size;
         
         this._data = new T[_capacity];
         Clone(this._data, data);
