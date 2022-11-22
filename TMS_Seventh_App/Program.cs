@@ -4,35 +4,22 @@
     {
         static void Main(string[] args)
         {
-            var myList = new MyList();
-            foreach (var item in myList)
-            {
-                Console.Write(item + " ");
-            }
+            var helper = new PagnationHelper<char>(new List<char> { 
+                  'a', 'b', 'c', 'd', 'e', 'f'
+                , 'g', 'h', 'i', 'j', 'k', 'l'
+                , 'm', 'n', 'o', 'p', 'r', 's'
+                , 't', 'u', 'w', 'x', 'y', 'z'
+            }, 10);
+            Console.WriteLine(helper.PageCount); //should == 3
+            Console.WriteLine(helper.ItemCount); //should == 24
+            Console.WriteLine(helper.PageItemCount(-1)); //should == -1
+            Console.WriteLine(helper.PageItemCount(2)); //should == 4
 
-            Console.WriteLine("\n");
-
-            var newList = new List<MyNewClass>()
-            {
-                new MyNewClass(1),
-                new MyNewClass(4),
-                new MyNewClass(10),
-                new MyNewClass(6),
-                new MyNewClass(7)
-            };
-
-            foreach (var item in newList)
-            {
-                Console.WriteLine(item.Number);
-            }
-
-            newList.Sort();
-            Console.WriteLine();
-
-            foreach (var item in newList)
-            {
-                Console.WriteLine(item.Number);
-            }
+            // pageIndex takes an item index and returns the page that it belongs on
+            Console.WriteLine(helper.PageIndex(5)); //should == 0 
+            Console.WriteLine(helper.PageIndex(2)); //should == 0
+            Console.WriteLine(helper.PageIndex(20)); //should == 2
+            Console.WriteLine(helper.PageIndex(-10)); //should == -1
         }
     }
 }
