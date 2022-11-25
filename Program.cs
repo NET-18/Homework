@@ -7,7 +7,8 @@
 
         public Point(int x, int y)
         {
-            this.x = x; this.y = y;
+            this.x = x; 
+            this.y = y;
         }
     }
     public interface IMovable
@@ -25,10 +26,8 @@
         }
         public Point point
         {
-            get
-            ;
-            set
-            ;
+            get;
+            set;
         }
     }
     public class Bike : IMovable
