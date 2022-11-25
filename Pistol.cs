@@ -14,7 +14,7 @@ namespace homework_16._11._2022
         
         public override void Info()
         {
-            if (Load> MaxLoad)
+            if (Load > MaxLoad)
             {
                 Load = MaxLoad;
             }
