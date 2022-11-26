@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 
 namespace ConsoleApp4
 {
-    internal class MyList<T> : IEnumerable<T>
+    internal class MyList <T> : IEnumerable<T>
     {
         private T[] data;
+        private int capacity = 1;
         private int size;
-        private int capacity=1;
 
         public int Capacity { get => this.capacity; }
-        public int Size { get => this.size; }
+        public int Size { get; }
 
         public MyList()
         {
@@ -31,10 +33,9 @@ namespace ConsoleApp4
             {
                 capacity *= 2;
                 T[] bufferData = new T[capacity];
-                int i = 0;
-                foreach (T item in data)
+                for (int i = 0; i < size; i++)
                 {
-                    bufferData[i++] = item;
+                    bufferData[i] = data[i];
                 }
                 bufferData[size++] = x;
                 data = bufferData;
@@ -47,12 +48,21 @@ namespace ConsoleApp4
             {
                 data[size++] = x;
             }
+
+        }
+        public void Clear()
+        {
+            size = 0;
+            T[]bufferData = new T[capacity];
+            data = bufferData[0..size];
         }
 
-        public System.Collections.Generic.IEnumerator<T> GetEnumerator()
+        public void Remove(T i)
         {
-            return new MyEnumerator<T>(data);
+           
         }
+        public System.Collections.Generic.IEnumerator<T> GetEnumerator() => new MyEnumerator<T>(data[0..size]);
+       
         System.Collections.IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -61,9 +71,9 @@ namespace ConsoleApp4
 
         private class MyEnumerator<T> : System.Collections.Generic.IEnumerator<T>
         {
-            private readonly T[] data;
+            private readonly T [] data;
             private int index = -1;
-
+          
             public T Current
             {
                 get
@@ -77,22 +87,26 @@ namespace ConsoleApp4
                 }
             }
 
-            object System.Collections.IEnumerator.Current => this.Current;
+            object System.Collections.IEnumerator.Current => Current;
 
-            T System.Collections.Generic.IEnumerator<T>.Current => this.Current;
+            T System.Collections.Generic.IEnumerator<T>.Current => Current;
 
             public MyEnumerator(T[] data)
             {
                 this.data = data;
             }
+
             public bool MoveNext()
             {
-                if (index < data.Length - 1)
+                if (index < data.Length-1)
                 {
                     index++;
                     return true;
                 }
-                return false;
+                else
+                { 
+                    return false;
+                }
             }
 
             public void Reset()
