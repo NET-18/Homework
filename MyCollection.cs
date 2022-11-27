@@ -9,10 +9,11 @@ namespace ConsoleApp4
     internal class MyList <T> : IEnumerable<T>
     {
         private T[] data;
+        private T[] datax;
         private int capacity = 1;
         private int size;
 
-        public int Capacity { get => this.capacity; }
+        public int Capacity { get => capacity; }
         public int Size { get; }
 
         public MyList()
@@ -48,20 +49,29 @@ namespace ConsoleApp4
             {
                 data[size++] = x;
             }
-
+            datax = new T[size];
+            for (int i = 0; i < size; i++)
+            {
+                datax[i] = data[i];
+            }
         }
         public void Clear()
         {
             size = 0;
             T[]bufferData = new T[capacity];
-            data = bufferData[0..size];
+            data = bufferData;
+            datax = new T[size];
+            for (int i = 0; i < size; i++)
+            {
+                datax[i] = data[i];
+            }
         }
 
         public void Remove(T i)
         {
            
         }
-        public System.Collections.Generic.IEnumerator<T> GetEnumerator() => new MyEnumerator<T>(data[0..size]);
+        public System.Collections.Generic.IEnumerator<T> GetEnumerator() => new MyEnumerator<T>(datax);
        
         System.Collections.IEnumerator IEnumerable.GetEnumerator()
         {
