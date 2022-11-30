@@ -13,8 +13,7 @@ public class Laptop : IComparable
     public string Processor { get; set; }
     public string ScreenTechnology { get; set; }
     public bool KeyboardBacklight { get; set; }
-    public int SSD { get; }
-    public int HDD { get; }
+    public int[] DriversCapacity { get; private set; } = new int[2];
     public DriveType DriveType { get; }
 
     public decimal Cost
@@ -80,8 +79,8 @@ public class Laptop : IComparable
         Cost = cost;
         Processor = processor;
         DriveType = driveType;
-        SSD = capacityOfStorage.Item1;
-        HDD = capacityOfStorage.Item2;
+        DriversCapacity[0] = capacityOfStorage.Item1;
+        DriversCapacity[1] = capacityOfStorage.Item2;
         RAM = ram;
         Weight = weight;
         OS = os;
@@ -112,8 +111,8 @@ public class Laptop : IComparable
                $"\nCost: {Cost}$" +
                $"\nProcessor: {Processor}" +
                $"\nOS: {OS}" +
-               $"\nSSD: {((DriveType & DriveType.SSD) == DriveType.SSD ? SSD : 0)} gb" +
-               $"\nHDD: {((DriveType & DriveType.HDD) == DriveType.HDD ? HDD : 0)} gb" +
+               $"\nSSD: {((DriveType & DriveType.SSD) == DriveType.SSD ? DriversCapacity[0] : 0)} gb" +
+               $"\nHDD: {((DriveType & DriveType.HDD) == DriveType.HDD ? DriversCapacity[1] : 0)} gb" +
                $"\nRAM: {RAM} gb" +
                $"\nWeight: {Weight} kg" +
                $"\nDiagonal: {Diagonal} inch" +
