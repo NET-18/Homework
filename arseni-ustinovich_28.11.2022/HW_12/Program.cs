@@ -20,7 +20,6 @@ namespace HW_12
             await FileWriteAsync(myText, myPath);
             myText = await FileReadAsync(myPath);
             Console.WriteLine(myText);
-            
 
             Console.WriteLine("OVER???");
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
@@ -30,7 +29,6 @@ namespace HW_12
         {
             for (int i = 0; i < 10; i++)
             {
-                
                 Console.WriteLine($"So fucking hard...[{Thread.CurrentThread.ManagedThreadId}]");
                 await Task.Delay(500);
             }
@@ -43,8 +41,7 @@ namespace HW_12
 
         static async Task<String> FileReadAsync(string filePath)
         {
-            string text = await File.ReadAllTextAsync(filePath);
-            return text;
+            return await File.ReadAllTextAsync(filePath);
         }
     }
 }
