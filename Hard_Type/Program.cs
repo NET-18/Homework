@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text;
 
 namespace ConsoleApp7
@@ -8,24 +9,26 @@ namespace ConsoleApp7
         public static async Task SimpleWriteAsync(List<Task<string>> tasks)
         {
             Console.WriteLine("SimpleWriteAsync Start");
-            string filePath = "RandomSites.txt";
-            string text = "";
+            int j = 1;
+            
             foreach (var item in tasks)
             {
-                text += item.Result + "\n\n";
+                await File.WriteAllTextAsync($"RandomSites{j++}.txt", item.Result);
             }
-            await File.WriteAllTextAsync(filePath, text);
+            
             Console.WriteLine("SimpleWriteAsync End");
         }
         
-        public static string DownloadWebsite(string websiteURL, int j)
+        public static async Task<string> DownloadWebsite(string websiteURL, int j)
         {
             WebsiteDataModel output = new WebsiteDataModel();
-            WebClient client = new WebClient();
-
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.GetAsync(websiteURL).Result;
+            HttpContent content = response.Content;
             output.Url = websiteURL;
-            output.Data = client.DownloadString(websiteURL);
+            output.Data = content.ReadAsStringAsync().Result;
             Console.WriteLine(j);
+            await Task.Delay(1000);
             return output.Data;
         }
         
@@ -43,12 +46,13 @@ namespace ConsoleApp7
                 "https://www.microsoft.com",
                 "https://www.cnn.com",
                 "https://www.codeproject.com",
-                "https://www.cdprojektred.com"
+                "https://www.cdprojektred.com",
+                "https://yandex.by"
             };
             
             for (int i = 0; i < sites.Length-1; i++)
             {
-                tasks.Add(Task.Factory.StartNew(() => DownloadWebsite(sites[i],j++)));
+                tasks.Add(Task.Run(() => DownloadWebsite(sites[i],j++)));
             }
 
             Task.WhenAll(tasks).Wait();
