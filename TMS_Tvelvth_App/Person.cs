@@ -20,6 +20,6 @@ namespace TMS_Tvelvth_App
         public string Address { get; set; }
         public string About { get; set; }
         public string[] Tags { get; set; }
-        public List<Friends> Friends { get; set; }
+        public List<Friend> Friends { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TMS_Tvelvth_App
             var json = await File.ReadAllTextAsync("generated.json");
             var people = JsonConvert.DeserializeObject<List<Person>>(json);
 
-            //people = people.OrderBy(person => person.Age).Where(person => person.Friends.Count > 3).ToList();
+            people = people.OrderBy(person => person.Age).Where(person => person.Friends.Count > 3).ToList();
 
             var resultJson = JsonConvert.SerializeObject(people);
 
