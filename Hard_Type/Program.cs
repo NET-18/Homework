@@ -52,14 +52,12 @@ namespace ConsoleApp7
             
             for (int i = 0; i < sites.Length-1; i++)
             {
-                tasks.Add(Task.Run(() => DownloadWebsite(sites[i],j++)));
+                tasks.Add(DownloadWebsite(sites[i],j++));
             }
 
             Task.WhenAll(tasks).Wait();
             SimpleWriteAsync(tasks).Wait();
             Console.ReadLine();
-
-
         }
     }
 }

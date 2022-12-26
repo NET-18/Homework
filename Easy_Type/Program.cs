@@ -39,20 +39,20 @@
 
         static async Task Main(string[] args)
         {
-            var t = DateTime.Now;
+            var time = DateTime.Now;
             int v = 1000;
             int j = 0;
             List<Task<string>> tasks = new List<Task<string>>(v);
 
             for (int i = 0; i <= v; i++)
             {
-                tasks.Add(Task.Run(() => StringRandom(v, j++)));
+                tasks.Add(StringRandom(v, j++));
             }
 
-            await Task.WhenAll(tasks);
+            Task.WhenAll(tasks).Wait();
             SimpleWriteAsync(tasks).Wait();
 
-            Console.WriteLine("Temelapse - {0}",DateTime.Now - t);
+            Console.WriteLine("Temelapse - {0}",DateTime.Now - time);
             Console.ReadLine();
         }
     }
