@@ -17,16 +17,11 @@ namespace HW12._21
             var response = await client.GetAsync("character/");
             var json = await response.Content.ReadAsStringAsync();
 
-            var characters = JsonConvert.DeserializeObject<List<Character>>(json);
+            var data = JsonConvert.DeserializeObject<Data>(json);
 
-            //var data = JsonConvert.DeserializeObject<string>(json);
-            //data = data.OrderBy()
+            var charactersResult = data.Characters.OrderBy(c => c.Episode.Length);
 
-            //people = people.OrderBy(p => p.Age).Where(p => p.Friends.Count > 3).ToList();
-
-            var charactersResult = characters.OrderBy(c => c.Status).ToList();
-
-            string resultJson = JsonConvert.SerializeObject(characters);
+            string resultJson = JsonConvert.SerializeObject(charactersResult);
 
             await File.WriteAllTextAsync("result.json", resultJson);
 
@@ -35,21 +30,5 @@ namespace HW12._21
 
             Console.WriteLine("complete");
         }
-    }
-
-    public class Info
-    {
-        public int Count { get; set; }
-        public int Pages { get; set; }
-        public string Next { get; set; }
-        public string Prev { get; set; }
-    }
-
-    public class Data
-    {
-        public Info Info { get; set; }
-
-        [JsonProperty("results")]
-        public Character Characters { get; set; }
     }
 }
