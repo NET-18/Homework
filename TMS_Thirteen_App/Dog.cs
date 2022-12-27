@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMS_Tvelvth_App
+namespace TMS_Thirteen_App
 {
-    internal class Friend
+    internal class Dog
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string Message { get; set; }
+        public string Status { get; set; }
     }
 }

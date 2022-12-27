@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS_Tvelvth_App", "TMS_Tvelvth_App\TMS_Tvelvth_App.csproj", "{81FA4DCA-DBE5-4F81-9372-8EB82D4B4F55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS_Thirteen_App", "TMS_Thirteen_App\TMS_Thirteen_App.csproj", "{1282FAD9-1B53-45E6-BFA7-D36FA316FF21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81FA4DCA-DBE5-4F81-9372-8EB82D4B4F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81FA4DCA-DBE5-4F81-9372-8EB82D4B4F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81FA4DCA-DBE5-4F81-9372-8EB82D4B4F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81FA4DCA-DBE5-4F81-9372-8EB82D4B4F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1282FAD9-1B53-45E6-BFA7-D36FA316FF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1282FAD9-1B53-45E6-BFA7-D36FA316FF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1282FAD9-1B53-45E6-BFA7-D36FA316FF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1282FAD9-1B53-45E6-BFA7-D36FA316FF21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9AC3CE24-F457-4C1F-AFB3-CD607AFCD68A}
+		SolutionGuid = {550705A4-2957-40B9-95E3-BEC852760E2E}
 	EndGlobalSection
 EndGlobal
