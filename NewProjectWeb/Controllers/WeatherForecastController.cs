@@ -31,25 +31,25 @@ public class WeatherForecastController : ControllerBase
         return await _weatherForecastService.GetByIdAsync(id);
     }
     
-    [HttpGet("/add")]
+    [HttpPost("/add")]
     public async Task AddWeather()
     {
         await _weatherForecastService.AddWeatherForecastAsync();
     }
     
-    [HttpGet("/update/{id:int}/{temp:int}}")]
+    [HttpPost("/update/{id:int}/{temp:int}/{summary}")]
     public async Task UpdateWeather(int id, int temp, string summary)
     {
         await _weatherForecastService.UpdateAsync(id, temp, summary);
     }
 
-    [HttpGet("/delete/temp/{temp:int}")]
+    [HttpDelete("/delete/temp/{temp:int}")]
     public async Task DeleteByTemperature(int temp)
     {
         await _weatherForecastService.DeleteWeatherByTemperatureAsync(temp);
     }
     
-    [HttpGet("/delete/id/{id:int}")]
+    [HttpDelete("/delete/id/{id:int}")]
     public async Task DeleteById(int id)
     {
         await _weatherForecastService.DeleteWeatherByIdAsync(id);
