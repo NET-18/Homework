@@ -1,4 +1,5 @@
 using NewProjectWeb;
+using NewProjectWeb.Services;
 
 class Program
 {
@@ -13,6 +14,10 @@ class Program
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddScoped<WeatherForecastService>();
+        builder.Services.AddTransient<SomeScopedService>();
+        builder.Services.AddSingleton<SomeSingletoneService>();
 
         var app = builder.Build();
 

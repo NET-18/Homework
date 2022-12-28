@@ -7,21 +7,22 @@ namespace NewProjectWeb.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    // [HttpGet("test/{id:int}")]
-    // public string TestConstraint(int id)
-    // {
-    //     return $"id: {id}";
-    // }
     private readonly WeatherForecastService _weatherForecastService;
-
-    public WeatherForecastController()
+    private readonly SomeScopedService _someScopedService;
+    private readonly SomeSingletoneService _someSingletoneService;
+    public WeatherForecastController(WeatherForecastService weatherForecastService, SomeScopedService someScopedService, 
+        SomeSingletoneService someSingletoneService)
     {
-        _weatherForecastService = new WeatherForecastService();
+        _weatherForecastService = weatherForecastService;
+        _someScopedService = someScopedService;
+        _someSingletoneService = someSingletoneService;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetAllForecastsAsync()
     {
+        Console.WriteLine($"Controller: {_someScopedService.Id}");
+        
         return await _weatherForecastService.GetAllAsync();
     }
 
