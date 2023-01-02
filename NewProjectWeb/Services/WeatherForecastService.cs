@@ -6,16 +6,8 @@ namespace NewProjectWeb.Services
 {
     public class WeatherForecastService
     {
-        private readonly SomeScopedService _someScopedService;
-        public WeatherForecastService(SomeScopedService someScopedService)
-        {
-            _someScopedService = someScopedService;
-        }
-        
         public async Task<List<WeatherForecast>> GetAllAsync()
         {
-            Console.WriteLine($"Service: {_someScopedService.Id}");
-            
             var json = await File.ReadAllTextAsync("data.json");
             return JsonConvert.DeserializeObject<List<WeatherForecast>>(json);
         }

@@ -8,21 +8,14 @@ namespace NewProjectWeb.Controllers;
 public class WeatherForecastController : ControllerBase
 {
     private readonly WeatherForecastService _weatherForecastService;
-    private readonly SomeScopedService _someScopedService;
-    private readonly SomeSingletoneService _someSingletoneService;
-    public WeatherForecastController(WeatherForecastService weatherForecastService, SomeScopedService someScopedService, 
-        SomeSingletoneService someSingletoneService)
+    public WeatherForecastController()
     {
-        _weatherForecastService = weatherForecastService;
-        _someScopedService = someScopedService;
-        _someSingletoneService = someSingletoneService;
+        _weatherForecastService = new WeatherForecastService();
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetAllForecastsAsync()
     {
-        Console.WriteLine($"Controller: {_someScopedService.Id}");
-        
         return await _weatherForecastService.GetAllAsync();
     }
 

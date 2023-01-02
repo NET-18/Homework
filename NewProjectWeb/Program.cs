@@ -16,8 +16,6 @@ class Program
         builder.Services.AddSwaggerGen();
         
         builder.Services.AddScoped<WeatherForecastService>();
-        builder.Services.AddTransient<SomeScopedService>();
-        builder.Services.AddSingleton<SomeSingletoneService>();
 
         var app = builder.Build();
 
