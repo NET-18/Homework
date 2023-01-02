@@ -44,13 +44,13 @@ public class WeatherForecastController : ControllerBase
         await _weatherForecastService.UpdateAsync(id, temp, summary);
     }
 
-    [HttpDelete("/delete/temp/{temp:int}")]
+    [HttpDelete("/temp/{temp:int}")]
     public async Task DeleteByTemperature(int temp)
     {
         await _weatherForecastService.DeleteWeatherByTemperatureAsync(temp);
     }
     
-    [HttpDelete("/delete/id/{id:int}")]
+    [HttpDelete("/id/{id:int}")]
     public async Task DeleteById(int id)
     {
         await _weatherForecastService.DeleteWeatherByIdAsync(id);
