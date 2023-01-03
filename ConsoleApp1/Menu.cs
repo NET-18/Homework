@@ -9,10 +9,10 @@ namespace ConsoleApp1
 {
     public class Menu
     {
-        public List<Drink> drinks { get; set; }
+        public List<Drink> Drinks { get; set; }
         public Menu (List<Drink> positions)
         {
-            drinks = positions;
+            Drinks = positions;
         }
     }
 }

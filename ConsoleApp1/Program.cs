@@ -22,7 +22,7 @@ namespace ConsoleApp1
             var margaritas = JsonConvert.DeserializeObject<Menu>(json);
 
             var list = new List<Drink>();
-            foreach (var item in margaritas.drinks)
+            foreach (var item in margaritas.Drinks)
             {
                 list.Add(item);
                 Console.WriteLine(item.IdDrink);
