@@ -40,13 +40,13 @@
         static async Task Main(string[] args)
         {
             var timeStart = DateTime.Now;
-            int v = 1000;
-            int j = 0;
-            List<Task<string>> tasks = new List<Task<string>>(v);
+            int valueMax = 1000;
+            int numberTask = 0;
+            List<Task<string>> tasks = new List<Task<string>>(valueMax);
 
-            for (int i = 0; i <= v; i++)
+            for (int i = 0; i <= valueMax; i++)
             {
-                tasks.Add(StringRandom(v, j++));
+                tasks.Add(StringRandom(valueMax, numberTask++));
             }
 
             await Task.WhenAll(tasks);

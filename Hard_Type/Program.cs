@@ -9,8 +9,8 @@ namespace ConsoleApp7
         public static async Task SimpleWriteAsync(List<Task<string>> tasks)
         {
             Console.WriteLine("SimpleWriteAsync Start");
-            int j = 1;
-            
+
+            int j = 1; 
             foreach (var item in tasks)
             {
                 await File.WriteAllTextAsync($"RandomSites{j++}.txt", item.Result);
@@ -19,7 +19,7 @@ namespace ConsoleApp7
             Console.WriteLine("SimpleWriteAsync End");
         }
         
-        public static async Task<string> DownloadWebsite(string websiteURL, int j)
+        public static async Task<string> DownloadWebsite(string websiteURL, int numberTask)
         {
             WebsiteDataModel output = new WebsiteDataModel();
             HttpClient client = new HttpClient();
@@ -27,7 +27,7 @@ namespace ConsoleApp7
             HttpContent content = response.Content;
             output.Url = websiteURL;
             output.Data = content.ReadAsStringAsync().Result;
-            Console.WriteLine(j);
+            Console.WriteLine(numberTask);
             await Task.Delay(1000);
             return output.Data;
         }
@@ -35,7 +35,7 @@ namespace ConsoleApp7
 
         static void Main(string[] args)
         {
-            int j = 0;
+            int numberDowload = 0;
             
             List<Task<string>> tasks = new List<Task<string>>();
 
@@ -52,7 +52,7 @@ namespace ConsoleApp7
             
             for (int i = 0; i < sites.Length-1; i++)
             {
-                tasks.Add(DownloadWebsite(sites[i],j++));
+                tasks.Add(DownloadWebsite(sites[i],numberDowload++));
             }
 
             Task.WhenAll(tasks).Wait();
