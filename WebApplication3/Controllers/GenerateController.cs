@@ -9,7 +9,6 @@ namespace WebApplication3.Controllers
     public class GenerateController : Controller
     {
         private readonly GenerateSevices _someScopedService;
-
         private readonly ILogger<GenerateController> _logger;
 
         public GenerateController(ILogger<GenerateController> logger, GenerateSevices someScopedService)
@@ -18,17 +17,16 @@ namespace WebApplication3.Controllers
             _someScopedService = someScopedService;
         }
 
-       
         [HttpGet]
         public async Task<ActionResult<Person>> GetRandom()
         {
-            var rand = new Random();
-            int friends = rand.Next(0,10);
-            int tags = rand.Next(2, 8);
+            int friends = Random.Shared.Next(0, 10);
+            int tags = Random.Shared.Next(2, 8);
             return await _someScopedService.GetRandomPerson(friends, tags);
         }
+
         [HttpGet("count/{count:int}/friends/{friends:int}/tags/{tags:int}/")]
-        public async Task<ActionResult<List<Person>>> GetById(int count, int friends, int tags)
+        public async Task<ActionResult<List<Person>>> GetByData(int count, int friends, int tags)
         {
             var list = new List<Person>();
 
@@ -39,7 +37,6 @@ namespace WebApplication3.Controllers
             var jsonResult = JsonConvert.SerializeObject(list);
             
             return JsonConvert.DeserializeObject<List<Person>>(jsonResult);
-            
         }
     }
 }

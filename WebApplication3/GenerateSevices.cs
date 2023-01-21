@@ -7,6 +7,7 @@ using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 
 namespace WebApplication3
 {
@@ -14,16 +15,12 @@ namespace WebApplication3
     {
         private readonly GenerateSevices _someScopedService;
 
-       
-        public async Task<Person> GetRandomPerson(int friends, int tags)
+        public async Task<Person> GetRandomPersonName()
         {
-            if (!File.Exists("generated.json"))
-                File.Create("generated.json").Close();
-            var json = await File.ReadAllTextAsync("generated.json");
-            JsonConvert.DeserializeObject<List<WeatherForecast>>(json);
-            var rand = new Random();
-            int r = rand.Next(0, 10);
+            int randomNumber = Random.Shared.Next(0, 10);
             var person = new Person();
+                person.Name="";
+                person.Gender="";
             string[] namesWoman =
             {
                 "Caroline",
@@ -42,54 +39,150 @@ namespace WebApplication3
                 "Tomy",
                 "Nikita"
             };
-            string[] namespeople = namesMan.Union(namesWoman).ToArray();
-            person.Guid = Guid.NewGuid();
 
-            if (r % 2 == 0)
+            if (randomNumber % 2 == 0)
             {
-                person.IsActive = true;
                 person.Gender = "Male";
-                person.Name = namesMan[rand.Next(0, namesMan.Length)];
+                person.Name = namesMan[Random.Shared.Next(0, namesMan.Length)];
             }
             else
             {
-                person.IsActive = false;
                 person.Gender = "Female";
-                person.Name = namesWoman[rand.Next(0, namesWoman.Length)];
+                person.Name = namesWoman[Random.Shared.Next(0, namesWoman.Length)];
+            }
+            return person;
+        }
+
+        public async Task<Guid> GetRandomGuid()
+        {
+            var guid = Guid.NewGuid();
+            return guid;
+        }
+
+        public async Task<string> GetRandomBalance()
+        {
+            int balanceInt = Random.Shared.Next(0, 99_999_999);
+            string balance = "";
+            if (balanceInt > 999_999)
+            {
+                int balance1part = balanceInt / 1000000;
+                int balance2part = balanceInt / 1000 - balance1part * 1000;
+                int balance3part = balanceInt - balance2part * 1000 - balance1part * 1000000;
+                balance = $"{balance1part},{balance2part}.{balance3part}";
+            }
+            if (balanceInt >= 999 && balanceInt <= 999_999)
+            {
+                int balance2part = balanceInt / 1000;
+                int balance3part = balanceInt - balance2part * 1000;
+                balance = $"{balance2part}.{balance3part}";
+            }
+            if (balanceInt < 999)
+            {
+                balance = $"0.{balanceInt}";
             }
 
-            person.Balance = $"${rand.Next(0,999)},{rand.Next(99, 999)}.{rand.Next(0, 999)}";
-            person.Age = rand.Next(0, 100);
+            return balance;
+        }
 
+        public async Task<int> GetRandomAge()
+        {
+            var person = await GetRandomPersonName();
+            var Age = Random.Shared.Next(person.Name.Length, 100);
+            return Age;
+        }
+
+        public async Task<string> GetRandomEmail()
+        {
             string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var email = "";
-            for (int i = 0; i < rand.Next(0,15); i++)
-            {
-                email = email + chars[rand.Next(0, chars.Length)];
-            }
-            email += "@mail.ru";
-            person.Email = email;
-            person.Phone = $"+{rand.Next(0, 7)} ({rand.Next(99, 999)}) {rand.Next(99, 999)}-{rand.Next(999, 9999)}";
-            var lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-            person.About = lorem[rand.Next(0, 20)..rand.Next(0,lorem.Length)];
 
-            string[] valueTags = { "occaecat", "adipisicing", "mollit", "cillum", "qui" , "ullamco", "fugiat" , "reprehenderit", "consequat", "nisi" };
-            person.Tags = new List<string>();
+            for (int i = 0; i < Random.Shared.Next(0, 15); i++)
+            {
+                email = email + chars[Random.Shared.Next(0, chars.Length)];
+            }
+            email += "@";
+            for (int i = 0; i < Random.Shared.Next(0, 10); i++)
+            {
+                email = email + chars[Random.Shared.Next(0, chars.Length)];
+            }
+            email += ".com";
+
+            return email;
+        }
+
+        public async Task<string> GetRandomPhone()
+        {
+            int part1 = Random.Shared.Next(0, 7);
+            int part2 = Random.Shared.Next(99, 999);
+            int part3 = Random.Shared.Next(99, 999);
+            int part4 = Random.Shared.Next(999, 9999);
+
+            var phone = $"+{part1} ({part2}) {part3}-{part4}";
+            return phone;
+        }
+
+        public async Task<string> GetRandomAbout()
+        {
+            var lorem = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+            var start = Random.Shared.Next(0, lorem.Length);
+            var about = lorem[start..Random.Shared.Next(start, lorem.Length)];
+
+            return about;
+        }
+        public async Task<List<string>> GetRandomTags(int tags)
+        {
+            string[] valueTags = { "occaecat", "adipisicing", "mollit", "cillum", "qui", "ullamco", "fugiat", "reprehenderit", "consequat", "nisi" };
+            var listTags = new List<string>();
             for (int i = 0; i < tags; i++)
             {
-                person.Tags.Add(valueTags[rand.Next(0, valueTags.Length)]);
+                listTags.Add(valueTags[Random.Shared.Next(0, valueTags.Length)]);
             }
-            person.Friends = new List<Friend>();
+            return listTags;
+        }
+        public async Task<List<Friend>> GetRandomFriends(int friends)
+        {
+            var listFriends = new List<Friend>();
             for (int i = 0; i < friends; i++)
             {
-                person.Friends.Add(new Friend()
+                var person = await GetRandomPersonName();
+                listFriends.Add(new Friend()
                 {
-                    Id =i,
-                    Name = namespeople[rand.Next(0, namespeople.Length)]
-                }) ;
+                    Id = i,
+                    Name = person.Name
+                });
+            }
+            return listFriends;
+        }
+
+    public async Task<Person> GetRandomPerson(int friends, int tags)
+        {
+            if (!File.Exists("generated.json"))
+            {
+                File.Create("generated.json").Close();
             }
 
-            var list = JsonConvert.DeserializeObject<List<Person>> (json);
+            var json = await File.ReadAllTextAsync("generated.json");
+            JsonConvert.DeserializeObject<List<Person>>(json);
+
+            Person person = await GetRandomPersonName();
+
+            person.Guid = await GetRandomGuid();
+
+            person.Balance = await GetRandomBalance();
+
+            person.Age = await GetRandomAge();
+
+            person.Email = await GetRandomEmail();
+
+            person.Phone = await GetRandomPhone();
+
+            person.About = await GetRandomAbout();
+
+            person.Tags = await GetRandomTags(tags);
+
+            person.Friends= await GetRandomFriends(friends);
+
+            var list = JsonConvert.DeserializeObject<List<Person>>(json);
             if (list == null)
             {
                 list = new List<Person>();

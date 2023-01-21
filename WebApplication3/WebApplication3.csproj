@@ -1,10 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="C:\Users\Андрей\source\repos\Homework\WebApplication3\GenerateSevices.cs" Link="GenerateSevices.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Lorem.NET" Version="1.0.6" />

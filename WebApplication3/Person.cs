@@ -3,12 +3,7 @@
 namespace WebApplication3
 {
     public class Person
-    {
-       public  Person()
-       {
-           
-       }
-        
+    {     
         public Guid Guid { get; set; }
         public bool IsActive { get; set; }
         public string Balance { get; set; }
