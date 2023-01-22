@@ -1,3 +1,5 @@
+using WebApplication3.Services;
+
 namespace WebApplication3
 {
     public class Program
@@ -13,7 +15,16 @@ namespace WebApplication3
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<GenerateSevices>();
+            builder.Services.AddScoped<GeneratePersonSevices>();
+            builder.Services.AddScoped<GenerateGuidService>();
+            builder.Services.AddScoped<GenerateBalanceService>();
+            builder.Services.AddScoped<GeneratePersonNameService>();
+            builder.Services.AddScoped<GenerateAgeService>();
+            builder.Services.AddScoped<GenerateEmailService>();
+            builder.Services.AddScoped<GeneratePhoneService>();
+            builder.Services.AddScoped<GenerateTagsService>();
+            builder.Services.AddScoped<GenerateAboutService>();
+            builder.Services.AddScoped<GenerateFriendService>();
 
             var app = builder.Build();
 

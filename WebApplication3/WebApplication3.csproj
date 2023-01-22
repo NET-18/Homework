@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="C:\Users\Андрей\source\repos\Homework\WebApplication3\GenerateSevices.cs" Link="GenerateSevices.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Lorem.NET" Version="1.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GeneratePersonSevices.cs" Link="GenerateSevices.cs" />
   </ItemGroup>
 
 </Project>
