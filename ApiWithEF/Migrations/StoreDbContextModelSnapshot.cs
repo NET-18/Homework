@@ -39,7 +39,7 @@ namespace ApiWithEF.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("ApiWithEF.Models.OrderProduct", b =>
@@ -54,7 +54,7 @@ namespace ApiWithEF.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderProduct");
+                    b.ToTable("OrderProduct", (string)null);
                 });
 
             modelBuilder.Entity("ApiWithEF.Models.Product", b =>
@@ -74,7 +74,7 @@ namespace ApiWithEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ApiWithEF.Models.User", b =>
@@ -95,7 +95,7 @@ namespace ApiWithEF.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("ApiWithEF.Models.Order", b =>

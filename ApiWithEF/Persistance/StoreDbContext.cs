@@ -8,6 +8,7 @@ namespace ApiWithEF.Persistance
         public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
+        
 
         public StoreDbContext(DbContextOptions<StoreDbContext> options)
             : base(options)
@@ -30,6 +31,10 @@ namespace ApiWithEF.Persistance
                         .WithMany(p => p.OrderProducts)
                         .HasForeignKey(o => o.OrderId)
                     );
+
+            builder.Entity<User>()
+                .HasMany(u => u.Orders)
+                .WithOne(o => o.User);
         }
     }
 }

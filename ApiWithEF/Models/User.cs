@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public ICollection<Order> Orders { get; set; }
     }
 }
