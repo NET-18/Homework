@@ -18,6 +18,10 @@ namespace ApiWithEF.Persistance
             base.OnModelCreating(builder);
 
             builder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders);
+            
+            builder.Entity<Order>()
                 .HasMany(o => o.Products)
                 .WithMany(p => p.Orders)
                 .UsingEntity<OrderProduct>(
