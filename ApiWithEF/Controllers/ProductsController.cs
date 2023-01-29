@@ -21,18 +21,7 @@ namespace ApiWithEF.Controllers
         {
             return await _context.Products.ToListAsync();
         }
-
-        [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllUsersAsync()
-        {
-            return await _context.Users.ToListAsync();
-        }
         
-        [HttpGet("orders/{userId:int}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrdersByUserAsync(int userId)
-        {
-            return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
-        }
         
         [HttpGet("products/{orderId:int}")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProductsByOrderAsync(int orderId)
@@ -40,28 +29,7 @@ namespace ApiWithEF.Controllers
             return await _context.Products.Where(p => p.Orders.Any(o => o.Id == orderId)).ToListAsync();
         }
 
-        [HttpPost("userId/{userId:int}/")]
-        public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
-        {
-            var totalPrice = 0.0m;
-            for (var i = 0; i < productsId.Length; i++)
-            {
-                totalPrice += _context.Products.FirstOrDefault(p => p.Id == productsId[i]).Price;
-            }
-            
-            var order = new Order()
-            {
-                UserId = userId,
-                TotalPrice = totalPrice
-            };
-
-            await _context.AddAsync(order);
-            
-            var linesCount = await _context.SaveChangesAsync();
-
-            return Ok(linesCount == 1);
-        }
-
+        
         [HttpPost("name/{name}/price/{price}")]
         public async Task<IActionResult> AddProductAsync(string name, decimal price)
         {
