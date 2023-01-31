@@ -20,7 +20,11 @@ namespace ApiWithEF.Persistance
             builder.Entity<Order>()
                 .HasOne(o => o.User)
                 .WithMany(u => u.Orders);
-            
+
+            builder.Entity<Order>().Property(o => o.TotalPrice).HasColumnType("decimal(18, 5)");
+
+            builder.Entity<Product>().Property(p => p.Price).HasColumnType("decimal(18, 5)");
+                
             builder.Entity<Order>()
                 .HasMany(o => o.Products)
                 .WithMany(p => p.Orders)
