@@ -9,8 +9,8 @@ namespace Homewok_25._01._2023
 {
     class DatabaseContext : DbContext
     {
-        
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);

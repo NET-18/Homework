@@ -79,8 +79,6 @@
                 forecast.Id, forecast.Date, forecast.TemperatureC, forecast.TemperatureF, forecast.Summary);
             }
             Console.WriteLine();
-
-
         }
     }
 }
