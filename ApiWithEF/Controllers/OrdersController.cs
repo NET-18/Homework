@@ -22,7 +22,7 @@ namespace ApiWithEF.Controllers
             return await _context.Orders.ToListAsync();
         }
         
-        [HttpGet("orders/{userId:int}")]
+        [HttpGet("orders/userId/{userId:int}")]
         public async Task<ActionResult<IEnumerable<Order>>> GetAllOrdersByUserAsync(int userId)
         {
             return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
@@ -31,19 +31,9 @@ namespace ApiWithEF.Controllers
         [HttpPost("userId/{userId:int}/")]
         public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
         {
-            var products = new List<Product>();
-            var allProducts = await _context.Products.ToListAsync();
+            var products = (await _context.Products.ToListAsync()).Where(p => productsId.Contains(p.Id)).ToList();
 
-            for (var i = 0; i < productsId.Length; i++)
-            {
-                products.Add(allProducts.FirstOrDefault(p => p.Id == productsId[i]));
-            }
-            
-            var totalPrice = 0.0m;
-            foreach (var product in products)
-            {
-                totalPrice += product.Price;
-            }
+            var totalPrice = products.Sum(product => product.Price);
 
             var order = new Order()
             {

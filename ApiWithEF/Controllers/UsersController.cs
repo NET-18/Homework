@@ -16,12 +16,6 @@ namespace ApiWithEF.Controllers
                 _context = context;
             }
 
-            [HttpGet]
-            public async Task<ActionResult<IEnumerable<User>>> GetAllAsync()
-            {
-                return await _context.Users.ToListAsync();
-            }
-            
             [HttpGet("users")]
             public async Task<ActionResult<IEnumerable<User>>> GetAllUsersAsync()
             {
