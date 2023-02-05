@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using HomeWork_Serialization_And_Network;
 using Newtonsoft.Json;
-using JsonConverter = System.Text.Json.Serialization.JsonConverter;
 
 class Program
 {
