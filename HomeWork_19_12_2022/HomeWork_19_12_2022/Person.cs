@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace HomeWork_19_12_2022;
 
-public class JsonHelper
+public class Person
 {
     [JsonProperty("_id")]
     public string Id { get; set; }

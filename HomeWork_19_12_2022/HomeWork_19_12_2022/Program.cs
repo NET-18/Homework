@@ -6,7 +6,7 @@ class Program
     public static async Task Main(string[] args)
     {
         var json = await File.ReadAllTextAsync("generated.json");
-        var list = JsonConvert.DeserializeObject<List<JsonHelper>>(json);
+        var list = JsonConvert.DeserializeObject<List<Person>>(json);
         var newList = list.OrderBy(x => x.Age).Where(x => x.Friends.Length > 3);
 
         var serialize = JsonConvert.SerializeObject(newList);
