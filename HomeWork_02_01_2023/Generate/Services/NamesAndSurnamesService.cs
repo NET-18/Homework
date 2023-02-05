@@ -1,6 +1,6 @@
 namespace Generate.Services;
 
-public static class NamesAndSurnamesService
+public class NamesAndSurnamesService
 {
     private static readonly string _names =
         "Wade Dave Seth Ivan Riley Gilbert Jorge Dan Brian Roberto Ramon Miles Liam Nathaniel Ethan Lewis" +
@@ -11,7 +11,7 @@ public static class NamesAndSurnamesService
         " Benjamin Luka Fred Albert Greyson Terry Cedric Joe Paul George Bruce Christopher Mark Ron Craig" +
         " Philip Jimmy Arthur Jaime Perry Harold Jerry Shawn Walter";
 
-    private static readonly string[] names = _names.Split(' ');
+    private readonly string[] names = _names.Split(' ');
 
     private static readonly string _surnames =
         "Williams Harris Thomas Robinson Walker Scott Nelson Mitchell Morgan Cooper Howard Davis Miller Martin" +
@@ -25,9 +25,9 @@ public static class NamesAndSurnamesService
         " Holmes Kennedy Saunders Fisher Hunter Reid Stewart Carter Phillips Spencer Howell Alvarez Little Jacobs" +
         " Foreman Knowles Meadows Richmond Valentine Dudley Woodward Weasley Livingston Sheppard Kimmel Noble Leach Gentry Lara Pace Trujillo Grant";
 
-    private static readonly string[] surnames = _surnames.Split(' ');
+    private readonly string[] surnames = _surnames.Split(' ');
 
-    public static string GetName()
+    public string GetName()
     {
         return $"{names[Random.Shared.Next(0, names.Length - 1)]} {surnames[Random.Shared.Next(0, surnames.Length - 1)]}";
     }

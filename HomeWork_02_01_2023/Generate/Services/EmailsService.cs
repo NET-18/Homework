@@ -1,10 +1,10 @@
 namespace Generate.Services;
 
-public static class EmailsService
+public class EmailsService
 {
-    private static readonly string[] ends = { "gmail.com", "mail.ru", "icloud.com", "bsu.by", "yandex.ru" };
+    private readonly string[] ends = { "gmail.com", "mail.ru", "icloud.com", "bsu.by", "yandex.ru" };
 
-    public static string GetEmail(string name)
+    public string GetEmail(string name)
     {
         var nameLower = name.ToLower().Split(' ');
 

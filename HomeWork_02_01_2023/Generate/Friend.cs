@@ -10,6 +10,6 @@ public class Friend
     public Friend(int id)
     {
         Id = id;
-        Name = NamesAndSurnamesService.GetName();
+        Name = Faker.Name.First();
     }
 }

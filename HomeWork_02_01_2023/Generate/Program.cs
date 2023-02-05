@@ -1,3 +1,5 @@
+using Generate.Services;
+
 class Program
 {
     public static void Main(string[] args)
@@ -5,6 +7,14 @@ class Program
         var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+        builder.Services.AddScoped<EmailsService>();
+        builder.Services.AddScoped<FriendsService>();
+        builder.Services.AddScoped<LargeTextsService>();
+        builder.Services.AddScoped<MergingService>();
+        builder.Services.AddScoped<NamesAndSurnamesService>();
+        builder.Services.AddScoped<PhoneNumbersService>();
+        builder.Services.AddScoped<WordsService>();
 
         builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,8 +1,8 @@
 namespace Generate.Services;
 
-public static class FriendsService
+public class FriendsService
 {
-    public static List<Friend> GetFriendsRandom()
+    public List<Friend> GetFriendsRandom()
     {
         var friends = new List<Friend>();
 
@@ -14,7 +14,7 @@ public static class FriendsService
         return friends;
     }
     
-    public static List<Friend> GetFriendsCount(int count)
+    public List<Friend> GetFriendsCount(int count)
     {
         var friends = new List<Friend>();
 

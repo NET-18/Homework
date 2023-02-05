@@ -2,7 +2,7 @@ namespace Generate.Services;
 
 public class LargeTextsService
 {
-    private static readonly string text =
+    private readonly string text =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in lorem dui. Aenean iaculis dui placerat fermentum ultrices. Vivamus arcu erat, eleifend vitae sapien at, consectetur ornare erat. Aenean lectus massa, egestas vitae luctus nec, consequat a quam. Donec massa turpis, sodales et tincidunt ut, eleifend in sapien. Aliquam non efficitur magna. Proin ut faucibus tortor. Quisque ex sem, facilisis eu euismod eget, tempus a ligula. Donec in facilisis orci. Curabitur eget nulla non odio elementum feugiat sed nec turpis. In ac blandit nibh, molestie consequat erat. Aliquam efficitur lacus quis ante ornare, in mattis dolor efficitur. Pellentesque elit ex, suscipit quis luctus sit amet, interdum quis turpis." +
         "Fusce sagittis turpis a mi venenatis, et lobortis erat egestas. Suspendisse suscipit suscipit blandit. Praesent nec nisl euismod, blandit nibh vitae, laoreet libero. Donec faucibus rhoncus sem ut egestas. Maecenas lobortis vehicula leo, in auctor tortor dignissim ut. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus vel porta velit, sit amet fringilla arcu. Aliquam porttitor vestibulum massa vel maximus. Sed sed risus magna. Maecenas lobortis condimentum sem, at luctus turpis vestibulum non. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;" +
         "Morbi ut consequat nunc. Cras commodo erat vitae ornare tristique. Praesent cursus, tellus vel placerat venenatis, leo orci aliquet libero, vel convallis lacus felis ac urna. Sed aliquam tincidunt gravida. Vivamus ac libero pharetra diam luctus faucibus eu id mauris. Donec vitae scelerisque nibh. Nunc erat magna, cursus vel ligula ut, interdum varius enim. Donec id commodo orci, et viverra orci. Vivamus venenatis quam quis varius volutpat. Cras in pretium augue, at ornare enim." +
@@ -14,7 +14,7 @@ public class LargeTextsService
         "Curabitur ut luctus massa, ac tristique augue. Sed commodo erat vel nibh sollicitudin pretium. Curabitur eu dolor nec ipsum accumsan volutpat ut eu neque. Cras pharetra a tellus eu mollis. Quisque sit amet tincidunt urna, id accumsan purus. Maecenas ut finibus lectus. Fusce molestie fringilla aliquet. Proin at dignissim ante. Sed sollicitudin mauris risus, sit amet placerat metus convallis sed. Duis vel posuere leo." +
         "Nullam in arcu sed lacus suscipit euismod. Mauris dictum pellentesque est sit amet pulvinar. Donec accumsan nec ligula viverra laoreet. Proin interdum fringilla orci, eu eleifend arcu euismod et. Donec nec ultrices lorem. Etiam gravida nunc et dictum tristique. Cras ac nulla dolor. Suspendisse accumsan dolor id mi egestas, quis pretium neque tempus.";
 
-    public static string GetLargeText()
+    public string GetLargeText()
     {
         return text[0..Random.Shared.Next(50, text.Length - 1)];
     }

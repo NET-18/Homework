@@ -8,15 +8,22 @@ namespace Generate.Controllers;
 [Route("[controller]")]
 public class GenerateController : ControllerBase
 {
+    private MergingService _mergingService;
+    
+    GenerateController(MergingService mergingService)
+    {
+        _mergingService = mergingService;
+    }
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Person>>> Get()
     {
-        return await MergingService.GetRandomCountOFObject();
+        return await _mergingService.GetRandomCountOFObject();
     }
 
     [HttpGet("/count/{count:int}/friends/{friends:int}/tags/{tags:int}")]
     public async Task<ActionResult<IEnumerable<Person>>> GetByCount(int count, int friends, int tags)
     {
-        return await MergingService.GetFixCountOFObject(count, tags, friends);
+        return await _mergingService.GetFixCountOFObject(count, tags, friends);
     }
 }

@@ -14,9 +14,9 @@ public class WordsService
         "Curabitur ut luctus massa, ac tristique augue. Sed commodo erat vel nibh sollicitudin pretium. Curabitur eu dolor nec ipsum accumsan volutpat ut eu neque. Cras pharetra a tellus eu mollis. Quisque sit amet tincidunt urna, id accumsan purus. Maecenas ut finibus lectus. Fusce molestie fringilla aliquet. Proin at dignissim ante. Sed sollicitudin mauris risus, sit amet placerat metus convallis sed. Duis vel posuere leo." +
         "Nullam in arcu sed lacus suscipit euismod. Mauris dictum pellentesque est sit amet pulvinar. Donec accumsan nec ligula viverra laoreet. Proin interdum fringilla orci, eu eleifend arcu euismod et. Donec nec ultrices lorem. Etiam gravida nunc et dictum tristique. Cras ac nulla dolor. Suspendisse accumsan dolor id mi egestas, quis pretium neque tempus.";
 
-    private static readonly string[] words = text.Split(' ', ';', '.', ',');
+    private readonly string[] words = text.Split(' ', ';', '.', ',');
     
-    public static string[] GetWordsRandom()
+    public string[] GetWordsRandom()
     {
         string[] wordsResult = new string[Random.Shared.Next(1, 15)];
         for (int i = 0; i < wordsResult.Length; i++)
@@ -27,7 +27,7 @@ public class WordsService
         return wordsResult;
     }
     
-    public static string[] GetWordsCount(int count)
+    public string[] GetWordsCount(int count)
     {
         var wordsResult = new string[count];
         for (int i = 0; i < count; i++)
