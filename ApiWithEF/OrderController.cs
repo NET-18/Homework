@@ -47,7 +47,7 @@ namespace ApiWithEF
             // при успешном выполнении он должен записать одну строку
             var linesCount = await _context.SaveChangesAsync();
 
-            return Ok(linesCount == 2);
+            return Ok(linesCount >= 2);
         }
     }
 }
