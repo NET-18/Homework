@@ -6,6 +6,6 @@ public class Bazooka: Weapon
     public override int YearOfRelease { get; set; }
     public override void Shoot()
     {
-        Console.WriteLine("Babaaaah!");
+        Console.WriteLine("Babaaaaaaaah!");
     }
 }
