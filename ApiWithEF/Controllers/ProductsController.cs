@@ -22,13 +22,13 @@ namespace ApiWithEF.Controllers
             return await _context.Products.ToListAsync();
         }
         
-        [HttpGet("products/order/{orderId:int}")]
+        [HttpGet("/order/{orderId:int}")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProductsByOrderAsync(int orderId)
         {
             return await _context.Products.Where(p => p.Orders.Any(o => o.Id == orderId)).ToListAsync();
         }
 
-        [HttpPost("name/{name}/price/{price}")]
+        [HttpPost("name/{name}/price/{price:decimal}")]
         public async Task<IActionResult> AddProductAsync(string name, decimal price)
         {
             var product = new Product
