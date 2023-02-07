@@ -1,5 +1,7 @@
-﻿using ApiWithEF.Models;
+﻿using ApiWithEF.Dtos;
+using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,26 +12,44 @@ namespace ApiWithEF.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly StoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductsController(StoreDbContext context)
+        public ProductsController(StoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GetProductDto>>> GetAllAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _mapper.ProjectTo<GetProductDto>(
+                _context.Products)
+                .ToListAsync();
         }
 
-        [HttpPost("name/{name}/price/{price}")]
-        public async Task<IActionResult> AddProductAsync(string name, decimal price)
+        [HttpGet("products/{orderId:int}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByOrderAsync(int orderId)
         {
-            var product = new Product
-            {
-                Name = name,
-                Price = price
-            };
+            var order = _context.Orders
+                .Include(p => p.Products)
+                .FirstOrDefault(a => a.Id == orderId);
+
+            return Ok(order.Products.ToList());
+
+            //return await _context.OrderProducts
+            //    .GroupBy(p => p.OrderId)
+            //    .ToListAsync();
+            //return await _context.Products
+            //    .Where(p => p.Orders
+            //    .Any(o => o.Id == orderId))
+            //    .ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProductAsync(AddProductDto dto)
+        {
+            var product = _mapper.Map<Product>(dto);
 
             await _context.AddAsync(product);
 
