@@ -12,9 +12,11 @@ namespace ApiWithEF
         private readonly StoreDbContext _context;
 
         [HttpGet("products/orderid/{orderid}")]
-        public ActionResult<IEnumerable<Product>> GetAllProductsOfOrder(int orderid)
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsOfOrder(int orderid)
         {
-            var order = _context.Orders.Include(p => p.Products).FirstOrDefault(a => a.Id == orderid);
+            var order = await _context.Orders
+                .Include(p => p.Products)
+                .FirstOrDefaultAsync(a => a.Id == orderid);
             if (order == null)
             {
                 Console.WriteLine($"order #{0} not exist", orderid);
@@ -74,9 +76,9 @@ namespace ApiWithEF
             }
             catch (Exception ex)
             {
+                await transaction.RollbackAsync();
                 return StatusCode(500);
             }
-            
         }
     }
 }
