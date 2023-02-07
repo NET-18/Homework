@@ -1,5 +1,7 @@
-﻿using ApiWithEF.Models;
+﻿using ApiWithEF.Dtos;
+using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,37 +12,38 @@ namespace ApiWithEF.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly StoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public OrdersController(StoreDbContext context)
+
+        public OrdersController(StoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet("{userid}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllUserOrdersAsync(int userid)
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAllUserOrdersAsync(int userid)
         {
-            return await _context.Orders
-                .Where(o => o.UserId == userid)
+            return await _mapper.ProjectTo<GetOrderDto>(
+                _context.Orders
+                .Where(o => o.UserId == userid))
                 .ToListAsync();
         }
 
-        [HttpPost("{userId}/{productIds}")]
-        public async Task<ActionResult> AddOrdersAsync (int userId, int[] productIds)
+        [HttpPost()]
+        public async Task<ActionResult> AddOrdersAsync(AddOrderDto dto)
         {
             using var transaction = _context.Database.BeginTransaction();
 
             try
             {
-                var order = new Order
-                {
-                    UserId = userId,
-                };
+                var order = _mapper.Map<Order>(dto);
 
                 await _context.AddAsync(order);
                 await _context.SaveChangesAsync();
 
                 var orderProducts = new List<OrderProduct>();
-                foreach (var productId in productIds)
+                foreach (var productId in dto.ProductsId)
                 {
                     orderProducts.Add(new()
                     {
@@ -52,7 +55,7 @@ namespace ApiWithEF.Controllers
                 await _context.AddRangeAsync(orderProducts);
 
                 order.TotalPrice = await _context.Products
-                    .Where(p => productIds.Contains(p.Id))
+                    .Where(p => dto.ProductsId.Contains(p.Id))
                     .Select(p => p.Price)
                     .SumAsync();
 
@@ -67,22 +70,6 @@ namespace ApiWithEF.Controllers
                 await transaction.RollbackAsync();
                 return StatusCode(500);
             }
-        }
-
-        [HttpPost("totalprice/{totalprice}/userid/{userid}")]
-        public async Task<IActionResult> AddOrderAsync(decimal totalprice, int userid)
-        {
-            var order = new Order
-            {
-                TotalPrice = totalprice,
-                UserId = userid
-            };
-
-            await _context.AddAsync(order);
-
-            var linesCount = await _context.SaveChangesAsync();
-
-            return Ok(linesCount == 1);
         }
     }
 }

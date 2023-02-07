@@ -1,5 +1,7 @@
-﻿using ApiWithEF.Models;
+﻿using ApiWithEF.Dtos;
+using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,26 +12,27 @@ namespace ApiWithEF.Controllers
     public class UsersController : ControllerBase
     {
         private readonly StoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public UsersController(StoreDbContext context)
+
+        public UsersController(StoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GetUserDto>>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _mapper.ProjectTo<GetUserDto>(
+                _context.Users)
+                .ToListAsync();
         }
 
-        [HttpPost("name/{name}/surname/{surname}")]
-        public async Task<IActionResult> AddUserAsync(string name, string surname)
+        [HttpPost]
+        public async Task<IActionResult> AddUserAsync(AddUserDto dto)
         {
-            var user = new User
-            {
-                Name = name,
-                Surname = surname
-            };
+            var user = _mapper.Map<User>(dto);
 
             await _context.AddAsync(user);
 

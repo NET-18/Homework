@@ -9,10 +9,15 @@ namespace ApiWithEF.Common
         public AutoMapperProfile()
         {
             CreateMap<AddProductDto, Product>();
-
             CreateMap<Product, GetProductDto>()
                 .ForMember(dest => dest.SelectTime, opt => opt.MapFrom(src =>
                     DateTime.Now));
+
+            CreateMap<User, GetUserDto>();
+            CreateMap<AddUserDto, User>();
+
+            CreateMap<Order, GetOrderDto>();
+            CreateMap<AddOrderDto, Order>();
         }
     }
 }

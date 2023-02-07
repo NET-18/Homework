@@ -28,22 +28,14 @@ namespace ApiWithEF.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("products/{orderId:int}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByOrderAsync(int orderId)
+        [HttpGet("{orderId:int}")]
+        public async Task<ActionResult<IEnumerable<GetProductDto>>> GetProductsByOrderAsync(int orderId)
         {
-            var order = _context.Orders
-                .Include(p => p.Products)
-                .FirstOrDefault(a => a.Id == orderId);
-
-            return Ok(order.Products.ToList());
-
-            //return await _context.OrderProducts
-            //    .GroupBy(p => p.OrderId)
-            //    .ToListAsync();
-            //return await _context.Products
-            //    .Where(p => p.Orders
-            //    .Any(o => o.Id == orderId))
-            //    .ToListAsync();
+            return await _mapper.ProjectTo<GetProductDto>(
+                _context.Products
+                .Where(p => p.Orders
+                .Any(o => o.Id == orderId)))
+                .ToListAsync();
         }
 
         [HttpPost]
