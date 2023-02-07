@@ -42,6 +42,17 @@ namespace ApiWithEF.Controllers
             return Ok(linesCount == 1);
         }
 
-       
+        [HttpGet("orderId/{orderId}")]
+        public ActionResult<IEnumerable<Product>> GetAllProductsOfOrder(int orderId)
+        {
+            var order = _context.Orders.Include(p => p.Products).FirstOrDefault(a => a.Id == orderId);
+            if (order == null)
+            {
+                Console.WriteLine($"order #{0} not exist", orderId);
+                return Ok(new List<Product>());
+            }
+
+            return Ok(order.Products.ToList());
+        }
     }
 }

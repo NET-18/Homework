@@ -11,43 +11,72 @@ namespace ApiWithEF
     {
         private readonly StoreDbContext _context;
 
-        [HttpGet("AllProducts/orderid/{orderid}")]
+        [HttpGet("products/orderid/{orderid}")]
         public ActionResult<IEnumerable<Product>> GetAllProductsOfOrder(int orderid)
         {
             var order = _context.Orders.Include(p => p.Products).FirstOrDefault(a => a.Id == orderid);
             if (order == null)
             {
                 Console.WriteLine($"order #{0} not exist", orderid);
-                return Ok(new List<Product>());
+                return NotFound();
             }
 
             return Ok(order.Products.ToList());
         }
 
-        [HttpPost("userid/{userid:int}")]
-        public async Task<IActionResult> AddOrderAsync(int userid, int[] productsid)
+        [HttpGet("userid/{userId}")]
+        public ActionResult<IEnumerable<Order>> GetAllOrdersOfUser(int userId)
         {
-            var order = new Order
+            var user = _context.Users.Include(o => o.Orders).FirstOrDefault(a => a.Id == userId);
+            if (user == null)
             {
-                UserId = userid
-            };
-
-            var resultProducts = new List<Product>();
-            var productsAdded = new List<Product>();
-
-            foreach (var product in productsid)
-            {
-                productsAdded.Add(_context.Products.FirstOrDefault(p => p.Id == product));
+                Console.WriteLine($"user#{0} not exist", userId);
+                return NotFound();
             }
-            resultProducts.AddRange(productsAdded);
-            order.Products = resultProducts;
-            await _context.AddAsync(order);
 
-            // SaveChanges возвращает количество изменённых строк, т.к. под капотом это обычный insert
-            // при успешном выполнении он должен записать одну строку
-            var linesCount = await _context.SaveChangesAsync();
+            return Ok(user.Orders.ToList());
+        }
 
-            return Ok(linesCount >= 2);
+        [HttpPost("userId/{userid:int}")]
+        public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
+        {
+            using var transaction =_context.Database.BeginTransaction();
+            try
+            {
+                var order = new Order
+                {
+                    UserId = userId
+                };
+
+                var resultProducts = new List<OrderProduct>();
+
+                foreach (var product in productsId)
+                {
+                    resultProducts.Add(new()
+                    {
+                        ProductId = product,
+                        OrderId = order.Id
+                    });
+                }
+
+                await _context.AddRangeAsync(resultProducts);
+
+                order.TotalPrice = await _context.Products
+                    .Where(p => productsId.Contains(p.Id))
+                    .Select(p => p.Price)
+                    .SumAsync();
+
+                await transaction.CommitAsync();
+
+                var linesCount = await _context.SaveChangesAsync();
+
+                return Ok(linesCount >= 1);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+            
         }
     }
 }
