@@ -1,5 +1,7 @@
-﻿using ApiWithEF.Models;
+﻿using ApiWithEF.Dtos;
+using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,22 +12,25 @@ namespace ApiWithEF.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly StoreDbContext _context;
-
-        public ProductsController(StoreDbContext context)
+        private readonly IMapper _mapper;
+        
+        public ProductsController(StoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GetProductDto>>> GetAllAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _mapper.ProjectTo<GetProductDto>(_context.Products).ToListAsync();
         }
         
-        [HttpGet("/order/{orderId:int}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByOrderAsync(int orderId)
+        [HttpGet("order/{orderId:int}")]
+        public async Task<ActionResult<IEnumerable<GetProductDto>>> GetProductsByOrderAsync(int orderId)
         {
-            return await _context.Products.Where(p => p.Orders.Any(o => o.Id == orderId)).ToListAsync();
+            return await _mapper.ProjectTo<GetProductDto>(_context.Products
+                .Where(p => p.Orders.Any(o => o.Id == orderId))).ToListAsync();
         }
 
         [HttpPost("name/{name}/price/{price:decimal}")]

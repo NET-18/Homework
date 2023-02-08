@@ -1,3 +1,4 @@
+using ApiWithEF.Common;
 using ApiWithEF.Persistance;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ namespace ApiWithEF
             // Add services to the container.
             builder.Services.AddDbContext<StoreDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+            builder.Services.AddAutoMapper(typeof(MyMapper));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

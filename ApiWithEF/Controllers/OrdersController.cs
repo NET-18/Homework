@@ -1,5 +1,7 @@
+using ApiWithEF.Dtos;
 using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,25 +12,27 @@ namespace ApiWithEF.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly StoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        public OrdersController(StoreDbContext context)
+        public OrdersController(StoreDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAllAsync()
         {
-            return await _context.Orders.ToListAsync();
+            return await _mapper.ProjectTo<GetOrderDto>(_context.Orders).ToListAsync();
         }
         
-        [HttpGet("/userId/{userId:int}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetAllOrdersByUserAsync(int userId)
+        [HttpGet("userId/{userId:int}")]
+        public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetAllOrdersByUserAsync(int userId)
         {
-            return await _context.Orders.Where(o => o.UserId == userId).ToListAsync();
+            return await _mapper.ProjectTo<GetOrderDto>(_context.Orders.Where(o => o.UserId == userId)).ToListAsync();
         }
 
-        [HttpPost("/userId/{userId:int}/")]
+        [HttpPost("userId/{userId:int}/")]
         public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
         {
             var products = await _context.Products.Where(p => productsId.Contains(p.Id)).ToListAsync();
