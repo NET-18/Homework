@@ -33,14 +33,10 @@ namespace ApiWithEF.Controllers
                 .Where(p => p.Orders.Any(o => o.Id == orderId))).ToListAsync();
         }
 
-        [HttpPost("name/{name}/price/{price:decimal}")]
-        public async Task<IActionResult> AddProductAsync(string name, decimal price)
+        [HttpPost]
+        public async Task<IActionResult> AddProductAsync(AddProductDto productDbo)
         {
-            var product = new Product
-            {
-                Name = name,
-                Price = price
-            };
+            var product = _mapper.Map<Product>(productDbo);
 
             await _context.AddAsync(product);
 

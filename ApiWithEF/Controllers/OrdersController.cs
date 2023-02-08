@@ -33,15 +33,15 @@ namespace ApiWithEF.Controllers
         }
 
         [HttpPost("userId/{userId:int}/")]
-        public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
+        public async Task<IActionResult> AddOrderAsync(AddOrderDto orderDto)
         {
-            var products = await _context.Products.Where(p => productsId.Contains(p.Id)).ToListAsync();
+            var products = await _context.Products.Where(p => orderDto.ProductsId.Contains(p.Id)).ToListAsync();
 
             var totalPrice = products.Sum(product => product.Price);
 
             var order = new Order()
             {
-                UserId = userId,
+                UserId = orderDto.UserId,
                 TotalPrice = totalPrice,
                 Products = products
             };
