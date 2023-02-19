@@ -1,29 +1,23 @@
-﻿using ApiWithEF.Models;
+﻿using ApiWithEF.Dtos;
+using ApiWithEF.Models;
 using ApiWithEF.Persistance;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiWithEF
+namespace ApiWithEF.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly StoreDbContext _context;
+        private readonly IMapper _mapper;
 
-        [HttpGet("products/orderid/{orderid}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAllProductsOfOrder(int orderid)
+        public OrderController(StoreDbContext context, IMapper mapper)
         {
-            var order = await _context.Orders
-                .Include(p => p.Products)
-                .FirstOrDefaultAsync(a => a.Id == orderid);
-            if (order == null)
-            {
-                Console.WriteLine($"order #{0} not exist", orderid);
-                return NotFound();
-            }
-
-            return Ok(order.Products.ToList());
+            _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet("userid/{userId}")]
@@ -36,23 +30,24 @@ namespace ApiWithEF
                 return NotFound();
             }
 
-            return Ok(user.Orders.ToList());
+            return Ok(_mapper.ProjectTo<GetOrderDto>(_context.Orders
+                    .Where(o => o.UserId == userId)));
         }
 
-        [HttpPost("userId/{userid:int}")]
-        public async Task<IActionResult> AddOrderAsync(int userId, int[] productsId)
+        [HttpPost]
+        public async Task<IActionResult> AddOrderAsync(AddOrderDto dto)
         {
-            using var transaction =_context.Database.BeginTransaction();
+            using var transaction = _context.Database.BeginTransaction();
             try
             {
-                var order = new Order
-                {
-                    UserId = userId
-                };
-
+                var order = new Order();
+                order =_mapper.Map<Order>(dto);
                 var resultProducts = new List<OrderProduct>();
 
-                foreach (var product in productsId)
+                await _context.AddAsync(order);
+                await _context.SaveChangesAsync();
+
+                foreach (var product in dto.ProductsId)
                 {
                     resultProducts.Add(new()
                     {
@@ -64,7 +59,7 @@ namespace ApiWithEF
                 await _context.AddRangeAsync(resultProducts);
 
                 order.TotalPrice = await _context.Products
-                    .Where(p => productsId.Contains(p.Id))
+                    .Where(p => dto.ProductsId.Contains(p.Id))
                     .Select(p => p.Price)
                     .SumAsync();
 
