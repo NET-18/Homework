@@ -1,10 +1,10 @@
 using ApiWithEF.Common;
-//using ApiWithEF.Filters;
+using ApiWithEF.Filters;
 using ApiWithEF.Persistance;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-//using ApiWithEF.Middlewares;
+using ApiWithEF.Middlewares;
 
 namespace ApiWithEF
 {
@@ -23,11 +23,11 @@ namespace ApiWithEF
             builder.Services.AddDbContext<StoreDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-            builder.Services.AddControllers();
-            //    options =>
-            //{
-            //   // options.Filters.Add<LastUserActivityActionFilter>();
-            //});
+            builder.Services.AddControllers(
+                options =>
+                {
+                    options.Filters.Add<LastUserActivityActionFilter>();
+                });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -41,7 +41,7 @@ namespace ApiWithEF
                 app.UseSwaggerUI();
             }
 
-            //app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

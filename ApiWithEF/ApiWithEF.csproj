@@ -7,10 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	    <Compile Include="C:\Users\Андрей\source\repos\Homework\LastUserActivityActionFilter.cs" Link="LastUserActivityActionFilter.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />

@@ -12,16 +12,17 @@ namespace ApiWithEF.Middlewares
         private readonly ILogger<ExceptionMiddleware> _logger;
 
 
-        public ExceptionMiddleware(ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(ILogger<ExceptionMiddleware> logger, RequestDelegate next)
         {
             _logger = logger;
+            _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await next.Invoke(context);
+                await _next.Invoke(context);
             }
             catch (Exception ex)
             {
