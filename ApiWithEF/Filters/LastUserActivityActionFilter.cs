@@ -37,7 +37,8 @@ namespace ApiWithEF.Filters
                 using var sr = new StreamReader(ms);
 
                 await context.HttpContext.Request.Body.CopyToAsync(ms);
-
+                ms.Position = 0;
+                
                 var json = await sr.ReadToEndAsync();
                 if (json == "")
                 {

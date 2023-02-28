@@ -10,8 +10,9 @@ namespace AutorisationApi.Services
         private readonly SymmetricSecurityKey _key;
         public TokenService(IConfiguration configuration)
         {
+            var a = configuration["TokenSignKey"];
             _key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration["TokenSignKey"]));
+                Encoding.UTF8.GetBytes(a));
         }
         public string CreateToken(string username)
         {
