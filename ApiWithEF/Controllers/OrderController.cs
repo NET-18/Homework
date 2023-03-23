@@ -22,7 +22,7 @@ namespace ApiWithEF.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("userid/{userId}")]
+        [HttpGet("userId/{userId}")]
         public ActionResult<IEnumerable<Order>> GetAllOrdersOfUser(int userId)
         {
             var user = _context.Users.Include(o => o.Orders).FirstOrDefault(a => a.Id == userId);

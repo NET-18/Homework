@@ -14,10 +14,10 @@ namespace AutorisationApi.Controllers
         {
             _tokenService = tokenService;
         }
-        [HttpPost("singinin/{username}")]
-        public ActionResult<string> SignIn(string username)
+        [HttpPost("singinIn/{userName}")]
+        public ActionResult<string> SignIn(string userName)
         {
-            return _tokenService.CreateToken(username);
+            return _tokenService.CreateToken(userName);
         }
     }
 }

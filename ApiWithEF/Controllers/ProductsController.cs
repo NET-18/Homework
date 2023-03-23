@@ -60,12 +60,7 @@ namespace ApiWithEF.Controllers
                 .Include(p => p.Products)
                 .Where(a => a.Id == orderId)
                 .Select(o => o.Products)
-                ));
-            /*Ok(await _context.Products
-                .Where(p => p.Orders
-                .Any(o => o.Id == orderId))
-                .ToListAsync());*/
-            
+                ));           
         }
     }
 }
